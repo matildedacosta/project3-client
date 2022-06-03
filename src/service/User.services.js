@@ -9,23 +9,23 @@ class UserService {
 
     this.storedToken = localStorage.getItem("authToken");
 
-    this.headers = { Authorization: `Bearer ${this.storedToken}` };
+    this.headers = { headers: { Authorization: `Bearer ${this.storedToken}` } };
   }
 
   getAllUsers = () => {
-    return this.api.get(`/api/users`);
+    return this.api.get(`/api/users`, this.headers);
   };
 
   getOneUser = (id) => {
-    return this.api.get(`/api/users/${id}`);
+    return this.api.get(`/api/users/${id}`, this.headers);
   };
 
-  updateCurrentUser = (requestBody, userId) => {
-    return this.api.put(`/api/users/${userId}`, requestBody);
+  updateCurrentUser = (requestBody, id) => {
+    return this.api.put(`/api/users/${id}`, requestBody, this.headers);
   };
 
-  deleteCurrentUser = (userId) => {
-    return this.api.delete(`/api/users/${userId}`);
+  deleteCurrentUser = (id) => {
+    return this.api.delete(`/api/users/${id}`, this.headers);
   };
 }
 

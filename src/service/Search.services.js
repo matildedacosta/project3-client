@@ -3,12 +3,12 @@ import axios from "axios";
 class SearchService {
   constructor() {
     this.api = axios.create({
-      baseURL: process.env.REACT_APP_BASE_URL,
+      baseURL: process.env.REACT_APP_API_URL,
     });
 
     this.storedToken = localStorage.getItem("authToken");
 
-    this.headers = { Authorization: `Bearer ${this.storedToken}` };
+    this.headers = { headers: { Authorization: `Bearer ${this.storedToken}` } };
   }
 
   filterEventResults = (requestBody) => {
