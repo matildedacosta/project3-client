@@ -1,0 +1,30 @@
+import axios from "axios";
+
+class CommentService {
+  constructor() {
+    this.api = axios.create({
+      baseURL: process.env.REACT_APP_BASE_URL,
+    });
+
+    this.storedToken = localStorage.getItem("authToken");
+
+    this.headers = { Authorization: `Bearer ${this.storedToken}` };
+  }
+
+  addComment = async (userId, requestBody) => {
+    return this.api.post(
+      `/api/profile/${userId}/add-comment`,
+      requestBody,
+      this.headers
+    );
+  };
+
+  removeComment = async (commentId) => {
+    return this.api.delete(`/api/comments/${commentId}`, this.headers);
+  };
+}
+
+// Create one instance of the service
+const commentService = new CommentService();
+
+export default commentService;
