@@ -1,8 +1,9 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../context/auth.context";
 import styled from "styled-components";
+import userService from "../service/User.services";
 
 const Nav = styled.nav`
   color: white;
@@ -11,7 +12,17 @@ const Nav = styled.nav`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: ${({ theme }) => theme.colors.lightBrown};
+  background-color: ${({ theme }) => theme.colors.red};
+
+  .logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .logo img {
+    height: 3vh;
+  }
 
   .nav-bar-links-div {
     display: flex;
@@ -21,35 +32,58 @@ const Nav = styled.nav`
 
   button {
     border-radius: 2px;
-    color: ${({ theme }) => theme.colors.lightBrown};
-    background-color: ${({ theme }) => theme.colors.aquaBlue};
-    border: 0.02rem solid ${({ theme }) => theme.colors.aquaBlue};
+    color: ${({ theme }) => theme.colors.red};
+    background-color: ${({ theme }) => theme.colors.white};
+    border: 0.02rem solid ${({ theme }) => theme.colors.white};
     height: 2.5vh;
     width: 3vw;
   }
 
   button:hover {
-    color: ${({ theme }) => theme.colors.aquaBlue};
-    background-color: ${({ theme }) => theme.colors.lightBrown};
-    border: 0.02rem solid ${({ theme }) => theme.colors.lightBrown};
+    color: ${({ theme }) => theme.colors.red};
+    background-color: ${({ theme }) => theme.colors.mint};
+    border: 0.02rem solid ${({ theme }) => theme.colors.mint};
   }
 `;
 
 function Navbar() {
   const { isLoggedIn, user, logoutUser } = useContext(AuthContext);
+  const [loggedUser, setLoggedUser] = useState("");
+
+  const getUser = async () => {
+    try {
+      let response = await userService.getOneUser(user._id);
+      console.log(response.data);
+      setLoggedUser(response.data.user);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getUser();
+  }, []);
 
   return (
     <Nav>
-      <div className="logo">logo</div>
+      <div className="logo">
+        <Link to="/">
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/282/282151.png"
+            alt="logo-pic"
+          />
+        </Link>
+      </div>
       <div className="div-for-flex"> </div>
       <div className="nav-bar-links-div">
         <Link to="/">Home</Link>
 
         {isLoggedIn && (
           <>
-            <Link to={`profile/${user._id}`}>Profile</Link>
+            <Link to={`/search-users`}>Músicos</Link>
+            <Link to={`search-events`}>Eventos</Link>
+            <Link to={`profile/${user._id}`}>{loggedUser.username}</Link>
             <button onClick={logoutUser}>Logout</button>
-            <p>{user.username}</p>
           </>
         )}
 

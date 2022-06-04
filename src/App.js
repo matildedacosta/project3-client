@@ -29,6 +29,7 @@ import EventDetailsPage from "./pages/search/EventDetailsPage";
 
 //Event Pages
 import CreateEvent from "./pages/eventspages/CreateEvent";
+import EditEvent from "./pages/eventspages/EditEvent";
 
 function App() {
   return (
@@ -95,7 +96,7 @@ function App() {
         />
 
         <Route
-          path="/profile/:id/my-events"
+          path="/profile/:id/events"
           element={
             <IsPrivate>
               <MyEventsPage />
@@ -144,6 +145,15 @@ function App() {
           element={
             <IsPrivate>
               <CreateEvent />
+            </IsPrivate>
+          }
+        />
+
+        <Route
+          path="/edit-event/:id"
+          element={
+            <IsPrivate>
+              <EditEvent />
             </IsPrivate>
           }
         />

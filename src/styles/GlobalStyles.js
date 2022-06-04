@@ -23,12 +23,12 @@ main{
 }
 
 a{
-    color: ${({ theme }) => theme.colors.aquaBlue};
+    color: ${({ theme }) => theme.colors.white};
     text-decoration: none;
 }
 
 a:hover{
-    color: ${({ theme }) => theme.colors.lightGrey};
+    color: ${({ theme }) => theme.colors.mint};
 }
 
 h1, h2, h3, h4, h5, h6{
