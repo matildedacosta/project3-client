@@ -3,6 +3,37 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/auth.context";
 import axios from "axios";
 
+import styled from "styled-components";
+
+const Login = styled.main`
+  display: flex;
+  flex-direction: column;
+
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  input {
+    width: 20vh;
+  }
+
+  button {
+    border-radius: 2px;
+    color: ${({ theme }) => theme.colors.lightBrown};
+    background-color: ${({ theme }) => theme.colors.aquaBlue};
+    border: 0.02rem solid ${({ theme }) => theme.colors.aquaBlue};
+    height: 2.5vh;
+    width: 3vw;
+  }
+
+  button:hover {
+    color: ${({ theme }) => theme.colors.aquaBlue};
+    background-color: ${({ theme }) => theme.colors.lightBrown};
+    border: 0.02rem solid ${({ theme }) => theme.colors.lightBrown};
+  }
+`;
+
 function LoginPage() {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
@@ -33,7 +64,7 @@ function LoginPage() {
   };
 
   return (
-    <div className="loginPage">
+    <Login className="loginPage">
       <h1>Login</h1>
 
       <form onSubmit={handleSubmit}>
@@ -53,8 +84,10 @@ function LoginPage() {
 
       {errorMessage && <p className="error-message">{errorMessage}</p>}
       <p>Don't have an account?</p>
-      <Link to="/signup"> Sign up</Link>
-    </div>
+      <Link to="/signup">
+        <button>Sign up</button>
+      </Link>
+    </Login>
   );
 }
 

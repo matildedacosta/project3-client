@@ -23,7 +23,6 @@ function Profile() {
   return (
     <main>
       <h1>{user.fullName}</h1>
-      
     </main>
   );
 }

@@ -11,13 +11,15 @@ import FontStyles from "./styles/fontStyles";
 
 const theme = {
   colors: {
-    mainOrange: "#EBB220",
+    orange: "#C58139",
     black: "#000000",
     white: "#FFFFFF",
-    textBlack: "#282828",
+    aquaBlue: "#c5ebe4",
+    darkBrown: "#552525",
+    lightBrown: "#633930",
+    beje: "AE866A",
     darkGrey: "#48494B",
     lightGrey: "#C8C8C9",
-    readMoreGrey: "#949494",
   },
 };
 

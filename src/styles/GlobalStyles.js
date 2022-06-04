@@ -2,32 +2,41 @@ import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
 
+*{
+    margin: 0;
+    padding: 0;
+}
+
 body{
     margin:0;
     padding:0;
     box-sizing:border-box;
     font-family: Avenir;
-    width:390px;
-    min-height:100vh;
-    display:flex;
-    flex-flow:column wrap;
-    align-items:center;
-    justify-content:center;
+    width: 100vw;
+    height: 100vh;
+}
 
-}
 main{
-   padding:3rem 1.5rem 20vh;
+    height: 100vh;
+    width: 100vw;
+    ${"" /* padding: 1rem 3rem; */}
 }
+
+a{
+    color: ${({ theme }) => theme.colors.aquaBlue};
+    text-decoration: none;
+}
+
+a:hover{
+    color: ${({ theme }) => theme.colors.lightGrey};
+}
+
 h1, h2, h3, h4, h5, h6{
-font-family: Faro Variable Trial;
 }
+
 h1{
 font-size: 2rem;
-font-weight: 1000;
-line-height: 3rem;
 }
-
-
 `;
 
 export default GlobalStyle;
