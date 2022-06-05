@@ -9,7 +9,7 @@ import IsPrivate from "./components/auth/IsPrivate";
 import SignupPage from "./pages/auth/SignupPage";
 import LoginPage from "./pages/auth/LoginPage";
 import HomePage from "./pages/HomePage";
-import Navbar from "./components/Navbar";
+import Header from "./components/Header";
 import Footer from "./components/Footer";
 import ErrorPage from "./pages/ErrorPage";
 
@@ -34,7 +34,7 @@ import EditEvent from "./pages/eventspages/EditEvent";
 function App() {
   return (
     <div className="App">
-      <Navbar />
+      <Header />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route

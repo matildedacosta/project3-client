@@ -40,7 +40,9 @@ function EventInfo(props) {
     <Event className="event-pic">
       <img src={event.image} alt="event-img" />
       <h4>{event.name}</h4>
+      {/* <h5>Responsável: @{event.creator.username}</h5> */}
       <h5>Localização: {event.location}</h5>
+      <h6>{event.date}</h6>
       <h5>Tipo de evento: {event.typeOfEvent}</h5>
       <p>{event.description}</p>
     </Event>

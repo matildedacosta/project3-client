@@ -2,6 +2,49 @@ import React, { useState, useEffect, useContext } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import eventServices from "../../service/Events.services";
 import { AuthContext } from "../../context/auth.context";
+import EventInfo from "../../components/eventsSearch/EventInfo";
+import styled from "styled-components";
+import Button from "../../components/Button";
+
+const Event = styled.section`
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 40vh;
+
+  h4 {
+    font-size: 0.8rem;
+    padding-top: 1rem;
+    color: ${({ theme }) => theme.colors.red};
+  }
+
+  h1 {
+    font-size: 1.2rem;
+    padding: 0.5rem 0 0.1rem;
+  }
+
+  h5 {
+    font-size: 0.9rem;
+    font-weight: 300;
+  }
+
+  p {
+    font-size: 0.9rem;
+  }
+
+  img {
+    height: 20vh;
+    border-radius: 5px;
+  }
+
+  .my-event-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+  }
+`;
 
 function MyEventsPage() {
   const { id } = useParams();
@@ -22,8 +65,17 @@ function MyEventsPage() {
     getMyEvents();
   }, []);
 
+  const removeEvent = async () => {
+    try {
+      let remove = await eventServices.removeMyEvent(id);
+      //setMyEvents();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
-    <div>
+    <Event>
       {myEvents.map((event) => {
         return (
           <div key={event._id} className="event-card">
@@ -32,14 +84,16 @@ function MyEventsPage() {
             <h5>Responsável: @{event.creator.username}</h5>
             <h6>{event.location}</h6>
             <h6>{event.date}</h6>
-            <Link to={`/event-details/${event._id}`}>
-              <button>Mais</button>
-            </Link>
-            <button>x</button>
+            <div className="my-event-buttons">
+              <Link to={`/event-details/${event._id}`}>
+                <Button>Ver mais</Button>
+              </Link>
+              <Button onClick={removeEvent}>x</Button>
+            </div>
           </div>
         );
       })}
-    </div>
+    </Event>
   );
 }
 

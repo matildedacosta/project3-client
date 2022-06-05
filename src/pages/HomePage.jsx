@@ -6,7 +6,7 @@ import Main from "../components/Main";
 import OQueOferece from "../components/OQueOferece";
 import Sobre from "../components/Sobre";
 
-const Home = styled.body`
+const Home = styled.main`
   hr {
     color: ${({ theme }) => theme.colors.red};
   }

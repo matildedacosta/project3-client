@@ -4,10 +4,45 @@ import { AuthContext } from "../../context/auth.context";
 import axios from "axios";
 
 import styled from "styled-components";
+import Button from "../../components/Button";
 
 const Login = styled.main`
   display: flex;
   flex-direction: column;
+  margin-left: 1.5rem;
+  //width: 100%;
+
+  Button {
+    width: 30vw;
+    font-size: 0.8rem;
+    border-radius: 5px;
+  }
+
+  .no-account Button {
+    background-color: ${({ theme }) => theme.colors.weirdWhite};
+    color: ${({ theme }) => theme.colors.red};
+    font-size: 0.8rem;
+    border-radius: 5px;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+    margin: 1rem 0;
+    color: ${({ theme }) => theme.colors.red};
+  }
+
+  label {
+    font-size: 1rem;
+  }
+
+  .no-account {
+    margin-top: 1rem;
+    display: flex;
+    //justify-content: center;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.8rem;
+  }
 
   form {
     display: flex;
@@ -15,10 +50,11 @@ const Login = styled.main`
   }
 
   input {
+    margin-bottom: 1rem;
     width: 20vh;
   }
 
-  button {
+  /*   button {
     border-radius: 2px;
     color: ${({ theme }) => theme.colors.lightBrown};
     background-color: ${({ theme }) => theme.colors.aquaBlue};
@@ -31,7 +67,7 @@ const Login = styled.main`
     color: ${({ theme }) => theme.colors.aquaBlue};
     background-color: ${({ theme }) => theme.colors.lightBrown};
     border: 0.02rem solid ${({ theme }) => theme.colors.lightBrown};
-  }
+  } */
 `;
 
 function LoginPage() {
@@ -79,14 +115,17 @@ function LoginPage() {
           onChange={handlePassword}
         />
 
-        <button type="submit">Login</button>
+        <Button className="button" type="submit">
+          Login
+        </Button>
       </form>
-
+      <div className="no-account">
+        <p>Don't have an account?</p>
+        <Link to="/signup">
+          <Button className="signup">Sign up</Button>
+        </Link>
+      </div>
       {errorMessage && <p className="error-message">{errorMessage}</p>}
-      <p>Don't have an account?</p>
-      <Link to="/signup">
-        <button>Sign up</button>
-      </Link>
     </Login>
   );
 }

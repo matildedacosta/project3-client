@@ -1,6 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 
+//Icons and Pics
+import chat from "../assets/pictures/chat.png";
+import evento from "../assets/pictures/evento.png";
+import tribo from "../assets/pictures/tenda-da-tribo.png";
+import music from "../assets/pictures/followmusic.jpg";
+
 const Features = styled.section`
   font-size: 0.6rem;
   //height: 30vh;
@@ -10,8 +16,20 @@ const Features = styled.section`
   align-items: center;
 
   h2 {
+    font-size: 1rem;
     color: ${({ theme }) => theme.colors.red};
     margin-bottom: 0.8rem;
+  }
+
+  .encontraras-img img {
+    height: 27vh;
+    border-radius: 5px;
+    margin-right: 2rem;
+  }
+
+  .icon {
+    height: 3vh;
+    margin-right: 0.5rem;
   }
 
   .features-info {
@@ -51,25 +69,25 @@ function OQueOferece() {
 
       <div className="features-info">
         <div className="encontraras-img">
-          <img src="" alt="music" />
+          <img src={music} alt="music" />
         </div>
         <div className="features">
           <article>
-            <img src="" alt="icon" />
+            <img className="icon" src={tribo} alt="icon" />
             <div className="feature-info">
               <h4>Cria a tua tribo</h4>
               <p>Procura e segue músicos que gostes!</p>
             </div>
           </article>
           <article>
-            <img src="" alt="icon" />
+            <img className="icon" src={chat} alt="icon" />
             <div className="feature-info">
               <h4>Conecta-te com a tua tribo</h4>
               <p>Envia mensagens e vai a eventos!</p>
             </div>
           </article>
           <article>
-            <img src="" alt="icon" />
+            <img className="icon" src={evento} alt="icon" />
             <div className="feature-info">
               <h4>Cria os teus eventos</h4>
               <p>Convida a tua tribo para um writing camp, concerto...</p>

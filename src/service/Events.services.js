@@ -27,6 +27,10 @@ class EventService {
     return this.api.put(`/api/events/${eventId}`, requestBody, this.headers);
   };
 
+  removeMyEvent = async (eventId) => {
+    return this.api.delete(`/my-events/${eventId}`, this.headers);
+  };
+
   deleteCurrentEvent = async (eventId) => {
     return await this.api.delete(`/api/events/${eventId}`, this.headers);
   };

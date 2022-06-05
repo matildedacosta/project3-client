@@ -35,10 +35,7 @@ function Sobre() {
         dolor sit amet consectetur, adipisicing elit. Ipsum recusandae sint
         repudiandae adipisci aspernatur, delectus deserunt. Laboriosam,
         molestias, dolorum id dolore, facere vitae quaerat sequi sint veritatis
-        explicabo voluptates ipsa. Lorem ipsum, dolor sit amet consectetur
-        adipisicing elit. Ea pariatur, veritatis ipsum quas dolor sequi
-        laboriosam expedita necessitatibus harum dolorum rem nulla quisquam
-        cumque! Quisquam porro dolores inventore animi sed?
+        explicabo voluptates ipsa.
       </p>
     </SobreMusiTribo>
   );
