@@ -53,8 +53,9 @@ function Navbar() {
   const getUser = async () => {
     try {
       let response = await userService.getOneUser(user._id);
-      console.log(response.data);
+      /*  console.log(response.data); */
       setLoggedUser(response.data.user);
+      console.log(loggedUser);
     } catch (error) {
       console.log(error);
     }
@@ -82,7 +83,10 @@ function Navbar() {
           <>
             <Link to={`/search-users`}>Músicos</Link>
             <Link to={`search-events`}>Eventos</Link>
-            <Link to={`profile/${user._id}`}>{loggedUser.username}</Link>
+            <Link to={`profile/${user._id}`}>
+              {" "}
+              Profile {loggedUser.username}
+            </Link>
             <button onClick={logoutUser}>Logout</button>
           </>
         )}

@@ -4,6 +4,18 @@ import { AuthContext } from "../../context/auth.context";
 import userService from "../../service/User.services";
 import styled from "styled-components";
 
+//Components
+import SearchBar from "../../components/search/SearchBar";
+import SearchFilter from "../../components/search/SearchFilter";
+import SearchCard from "../../components/search/SearchCard";
+
+const SearchUsers = styled.main`
+  padding-top: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
 function SearchUsersPage(props) {
   const [users, setUsers] = useState([]);
   const [searchUsers, setSearchUsers] = useState([...users]);
@@ -34,27 +46,13 @@ function SearchUsersPage(props) {
   getAllUsers();
 
   return (
-    <div>
-      <label htmlFor="search">Conecta-te</label>
-      <input type="text" name="search" value={search} onChange={handleSearch} />
-      {users.map((user) => {
-        return (
-          <div className="user-card" key={user._id}>
-            <img src={user.image} alt="user-img" />
-            <h5> {user.username}</h5>
-            <Link to={`/user-details/${user._id}`}>
-              <button>Mais</button>
-            </Link>
-          </div>
-        );
-      })}
-      <aside className="aside-filter">
-        <h6>Filtros</h6>
-        <label htmlFor="location">Localidade:</label>
-        <input type="text" name="location" />
-        <label htmlFor="skills">Tipo:</label>
-      </aside>
-    </div>
+    <SearchUsers>
+      <SearchBar handleSearch={handleSearch} search={search} />
+
+      <SearchFilter />
+
+      <SearchCard users={users} />
+    </SearchUsers>
   );
 }
 

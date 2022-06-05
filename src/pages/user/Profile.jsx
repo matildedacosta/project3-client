@@ -1,6 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import userService from "../../service/User.services";
+import styled from "styled-components";
+
+//Components
+import UserInfo from "../../components/Profile/UserInfo";
+import Skills from "../../components/Profile/Skills";
+import Links from "../../components/Profile/Links";
+import Comments from "../../components/Profile/Comments";
+import UserButtons from "../../components/Profile/UserButtons";
+
+const UserProfile = styled.body`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 
 function Profile() {
   const { id } = useParams();
@@ -27,70 +41,14 @@ function Profile() {
   }, []);
 
   return (
-    <main>
-      <img src={user.image} alt="profile-img" />
-      <h4>{user.username}</h4>
-      <h1>Name: {user.fullName}</h1>
-      <h5>Localidade: {user.location}</h5>
-      <p>{user.description}</p>
-      <h5>As minhas ligações com a música:</h5>
-      <ul>
-        {skills.map((skill) => {
-          return (
-            <div key={skill}>
-              <li>{skill}</li>
-            </div>
-          );
-        })}
-      </ul>
-      <div className="user-links">
-        <a href={links.spotify} target="_blank">
-          <img src="" alt="spotify-icon" />
-        </a>
-        <a href={links.instagram} target="_blank">
-          <img src="" alt="spotify-icon" />
-        </a>
-        <a href={links.facebook} target="_blank">
-          <img src="" alt="spotify-icon" />
-        </a>
-        <a href={links.youtube} target="_blank">
-          <img src="" alt="spotify-icon" />
-        </a>
-        <a href={links.soundcloud} target="_blank">
-          <img src="" alt="soundcloud-icon" />
-        </a>
-        <a href={links.portfolio} target="_blank">
-          <img src="" alt="spotify-icon" />
-        </a>
-      </div>
+    <UserProfile>
+      <UserInfo user={user} />
+      <Skills skills={skills} />
+      <Links links={links} />
+      <Comments receivedComments={receivedComments} />
 
-      <h5>Comentários:</h5>
-      <form>
-        <textarea name="comments" id="comments" cols="30" rows="10"></textarea>
-      </form>
-      <div className="comments">
-        {receivedComments.map((comment) => {
-          return (
-            <div>
-              <p>{comment.comment}</p>
-              <h6>{comment.commentBy}</h6>
-            </div>
-          );
-        })}
-      </div>
-      <Link to={`/profile/${user._id}/events`}>
-        <button>My Events</button>
-      </Link>
-      <Link to={`/profile/${user._id}/followers`}>
-        <button>Followers</button>
-      </Link>
-      <Link to={`/profile/${user._id}/following`}>
-        <button>Following</button>
-      </Link>
-      <Link to={`/edit-profile/${user._id}`}>
-        <button>Editar</button>
-      </Link>
-    </main>
+      <UserButtons user={user} />
+    </UserProfile>
   );
 }
 

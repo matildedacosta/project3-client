@@ -2,22 +2,45 @@ import React from "react";
 import styled from "styled-components";
 
 const Features = styled.section`
-  height: 40vh;
+  font-size: 0.6rem;
+  //height: 30vh;
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
 
+  h2 {
+    color: ${({ theme }) => theme.colors.red};
+    margin-bottom: 0.8rem;
+  }
+
   .features-info {
-    width: 70vw;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    width: 85vw;
+    height: 30vh;
   }
 
   .features p {
-    line-height: 2rem;
-    width: 20vw;
+    line-height: 1rem;
+    width: 30vw;
+  }
+
+  .features article {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    margin: 0.5rem;
+  }
+
+  .feature-info {
+    display: flex;
+    flex-direction: column;
+    //align-items: center;
+    justify-content: center;
+    width: 40vw;
   }
 `;
 
@@ -32,28 +55,25 @@ function OQueOferece() {
         </div>
         <div className="features">
           <article>
-            <h4>Feature 1</h4>
-            <img src="" alt="" />
-            <p>
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Non,
-              quidem aspernatur!
-            </p>
+            <img src="" alt="icon" />
+            <div className="feature-info">
+              <h4>Cria a tua tribo</h4>
+              <p>Procura e segue músicos que gostes!</p>
+            </div>
           </article>
           <article>
-            <h4>Feature 2</h4>
-            <img src="" alt="" />
-            <p>
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Non,
-              quidem aspernatur!
-            </p>
+            <img src="" alt="icon" />
+            <div className="feature-info">
+              <h4>Conecta-te com a tua tribo</h4>
+              <p>Envia mensagens e vai a eventos!</p>
+            </div>
           </article>
           <article>
-            <h4>Feature 3</h4>
-            <img src="" alt="" />
-            <p>
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Non,
-              quidem aspernatur!
-            </p>
+            <img src="" alt="icon" />
+            <div className="feature-info">
+              <h4>Cria os teus eventos</h4>
+              <p>Convida a tua tribo para um writing camp, concerto...</p>
+            </div>
           </article>
         </div>
       </div>

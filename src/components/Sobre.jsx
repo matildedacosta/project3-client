@@ -9,9 +9,14 @@ const SobreMusiTribo = styled.section`
   align-items: center;
   gap: 10%;
 
+  h2 {
+    color: ${({ theme }) => theme.colors.red};
+    font-size: 1rem;
+  }
+
   p {
-    width: 70vw;
-    line-height: 2rem;
+    font-size: 0.65rem;
+    line-height: 1.5rem;
   }
 `;
 
@@ -28,20 +33,6 @@ function Sobre() {
         sequi laboriosam expedita necessitatibus harum dolorum rem nulla
         quisquam cumque! Quisquam porro dolores inventore animi sed? Lorem ipsum
         dolor sit amet consectetur, adipisicing elit. Ipsum recusandae sint
-        repudiandae adipisci aspernatur, delectus deserunt. Laboriosam,
-        molestias, dolorum id dolore, facere vitae quaerat sequi sint veritatis
-        explicabo voluptates ipsa. Lorem ipsum, dolor sit amet consectetur
-        adipisicing elit. Ea pariatur, veritatis ipsum quas dolor sequi
-        laboriosam expedita necessitatibus harum dolorum rem nulla quisquam
-        cumque! Quisquam porro dolores inventore animi sed? Lorem ipsum dolor
-        sit amet consectetur, adipisicing elit. Ipsum recusandae sint
-        repudiandae adipisci aspernatur, delectus deserunt. Laboriosam,
-        molestias, dolorum id dolore, facere vitae quaerat sequi sint veritatis
-        explicabo voluptates ipsa. Lorem ipsum, dolor sit amet consectetur
-        adipisicing elit. Ea pariatur, veritatis ipsum quas dolor sequi
-        laboriosam expedita necessitatibus harum dolorum rem nulla quisquam
-        cumque! Quisquam porro dolores inventore animi sed? Lorem ipsum dolor
-        sit amet consectetur, adipisicing elit. Ipsum recusandae sint
         repudiandae adipisci aspernatur, delectus deserunt. Laboriosam,
         molestias, dolorum id dolore, facere vitae quaerat sequi sint veritatis
         explicabo voluptates ipsa. Lorem ipsum, dolor sit amet consectetur
