@@ -4,6 +4,18 @@ import { AuthContext } from "../../context/auth.context";
 import eventServices from "../../service/Events.services";
 import styled from "styled-components";
 
+//Components
+import EventSearchBar from "../../components/eventsSearch/EventSearchBar";
+import EventSearchCard from "../../components/eventsSearch/EventSearchCard";
+import EventSearchFilter from "../../components/eventsSearch/EventSearchFilter";
+
+const SearchEvents = styled.main`
+  padding-top: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
 function SearchEventsPage() {
   const [events, setEvents] = useState([]);
   const [searchEvents, setSearchEvents] = useState([...events]);
@@ -33,27 +45,11 @@ function SearchEventsPage() {
   };
 
   return (
-    <div>
-      <label htmlFor="search">Participa</label>
-      <input type="text" name="search" value={search} onChange={handleSearch} />
-      {events.map((event) => {
-        return (
-          <div className="event-card" key={event._id}>
-            <img src={event.image} alt="event-img" />
-            <h5> {event.name}</h5>
-            <Link to={`/event-details/${event._id}`}>
-              <button>Mais</button>
-            </Link>
-          </div>
-        );
-      })}
-      <aside className="aside-filter">
-        <h6>Filtros</h6>
-        <label htmlFor="location">Localidade:</label>
-        <input type="text" name="location" />
-        <label htmlFor="skills">Tipo:</label>
-      </aside>
-    </div>
+    <SearchEvents>
+      <EventSearchBar handleSearch={handleSearch} search={search} />
+      <EventSearchFilter />
+      <EventSearchCard events={events} />
+    </SearchEvents>
   );
 }
 

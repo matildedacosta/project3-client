@@ -2,6 +2,8 @@ import React, { useState, useEffect, useContext } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import eventServices from "../../service/Events.services";
 import { AuthContext } from "../../context/auth.context";
+import Button from "../../components/Button";
+import EventInfo from "../../components/eventsSearch/EventInfo";
 
 function EventDetailsPage() {
   const { id } = useParams();
@@ -27,16 +29,10 @@ function EventDetailsPage() {
 
   return (
     <div>
-      <div className="event-pic">
-        <img src={event.image} alt="event-img" />
-        <h4>{event.name}</h4>
-        <h5>Localização: {event.location}</h5>
-        <h5>Tipo de evento: {event.typeOfEvent}</h5>
-        <p>{event.description}</p>
-        <Link to={`/profile/${user._id}/my-events`}>
-          <button>Eu vou</button>
-        </Link>
-      </div>
+      <EventInfo event={event} />
+      <Link to={`/profile/${user._id}/my-events`}>
+        <Button>Eu vou</Button>
+      </Link>
     </div>
   );
 }

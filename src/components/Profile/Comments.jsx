@@ -1,10 +1,23 @@
 import React from "react";
 import styled from "styled-components";
+import Button from "../Button";
 
 const UserComments = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  //padding: 1rem;
+  textarea {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0.5rem;
+  }
+
+  .comments {
+    margin: 0.5rem;
+  }
 `;
 
 function Comments(props) {
@@ -15,6 +28,7 @@ function Comments(props) {
       <h5>Comentários:</h5>
       <form>
         <textarea name="comments" id="comments" cols="30" rows="10"></textarea>
+        <Button>Comentar</Button>
       </form>
       <div className="comments">
         {receivedComments.map((comment) => {

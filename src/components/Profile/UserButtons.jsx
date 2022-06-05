@@ -3,11 +3,20 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Button from "../Button";
 
+const Buttons = styled.section`
+  padding-bottom: 2.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  align-items: center;
+  justify-content: center;
+`;
+
 function UserButtons(props) {
   const { user } = props;
 
   return (
-    <section className="profile-buttons">
+    <Buttons className="profile-buttons">
       <Link to={`/profile/${user._id}/events`}>
         <Button>My Events</Button>
       </Link>
@@ -20,7 +29,7 @@ function UserButtons(props) {
       <Link to={`/edit-profile/${user._id}`}>
         <Button>Editar</Button>
       </Link>
-    </section>
+    </Buttons>
   );
 }
 

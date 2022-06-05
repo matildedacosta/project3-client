@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-const User = styled.main`
+const Event = styled.section`
   margin-top: 2rem;
   display: flex;
   flex-direction: column;
@@ -28,23 +28,23 @@ const User = styled.main`
     font-size: 0.9rem;
   }
 
-  .profile-img {
+  img {
     height: 20vh;
     border-radius: 5px;
   }
 `;
 
-function UserInfo(props) {
-  const { user } = props;
+function EventInfo(props) {
+  const { event } = props;
   return (
-    <User>
-      <img className="profile-img" src={user.image} alt="profile-img" />
-      <h4>{user.username}</h4>
-      <h1>{user.fullName}</h1>
-      <h5>{user.location}</h5>
-      <p>{user.description}</p>
-    </User>
+    <Event className="event-pic">
+      <img src={event.image} alt="event-img" />
+      <h4>{event.name}</h4>
+      <h5>Localização: {event.location}</h5>
+      <h5>Tipo de evento: {event.typeOfEvent}</h5>
+      <p>{event.description}</p>
+    </Event>
   );
 }
 
-export default UserInfo;
+export default EventInfo;

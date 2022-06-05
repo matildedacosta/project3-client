@@ -9,6 +9,7 @@ const UserSkills = styled.section`
   height: 20vh;
 
   h5 {
+    font-size: 1rem;
     margin: 0.5rem;
     font-weight: 400;
   }
