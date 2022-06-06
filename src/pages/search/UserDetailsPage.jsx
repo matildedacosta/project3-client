@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import userService from "../../service/User.services";
 import followService from "../../service/Follow.services";
+import commentService from "../../service/Comments.services";
 import styled from "styled-components";
 
 //Components
@@ -23,6 +24,7 @@ function UserDetailsPage() {
   const [skills, setSkills] = useState([]);
   const [links, setLinks] = useState({});
   const [receivedComments, setComments] = useState([]);
+  const [newComments, setNewComments] = useState([]);
 
   const addFollow = async () => {
     try {
@@ -57,13 +59,28 @@ function UserDetailsPage() {
     getUser();
   }, []);
 
+  const submitComment = (e) => {
+    e.preventDefault();
+    const body = { newComments };
+
+    try {
+      commentService.addComment(id, body);
+      setNewComments("");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <UserProfile>
       <UserInfo user={user} />
       <Button onClick={addFollow}>Follow</Button>
       <Skills skills={skills} />
       <Links links={links} />
-      <Comments receivedComments={receivedComments} />
+      <Comments
+        submitComment={submitComment}
+        receivedComments={receivedComments}
+      />
     </UserProfile>
   );
 }

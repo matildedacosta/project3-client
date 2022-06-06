@@ -21,14 +21,14 @@ const UserComments = styled.section`
 `;
 
 function Comments(props) {
-  const { receivedComments } = props;
+  const { receivedComments, submitComment } = props;
 
   return (
     <UserComments>
       <h5>Comentários:</h5>
-      <form>
+      <form onSubmit={submitComment}>
         <textarea name="comments" id="comments" cols="30" rows="10"></textarea>
-        <Button>Comentar</Button>
+        <Button type="submit">Comentar</Button>
       </form>
       <div className="comments">
         {receivedComments.map((comment) => {

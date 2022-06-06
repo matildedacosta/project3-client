@@ -7,6 +7,7 @@ import OQueOferece from "../components/OQueOferece";
 import Sobre from "../components/Sobre";
 
 const Home = styled.main`
+  width: 100%;
   hr {
     color: ${({ theme }) => theme.colors.red};
   }

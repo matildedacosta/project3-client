@@ -1,5 +1,4 @@
 import axios from "axios";
-import { request } from "express";
 
 class AuthService {
   constructor() {

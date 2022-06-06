@@ -9,11 +9,13 @@ import Skills from "../../components/Profile/Skills";
 import Links from "../../components/Profile/Links";
 import Comments from "../../components/Profile/Comments";
 import UserButtons from "../../components/Profile/UserButtons";
+import Button from "../../components/Button";
 
-const UserProfile = styled.body`
+const UserProfile = styled.main`
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
 `;
 
 function Profile() {
@@ -40,14 +42,21 @@ function Profile() {
     getUser();
   }, []);
 
+  const deleteUser = () => {
+    userService.deleteCurrentUser(id);
+  };
+
   return (
     <UserProfile>
       <UserInfo user={user} />
       <Skills skills={skills} />
-      <Links links={links} />
+      {links > 0 && <Links links={links} />}
       <Comments receivedComments={receivedComments} />
 
       <UserButtons user={user} />
+      <form onSubmit={deleteUser}>
+        <Button type="submit">Apagar conta</Button>
+      </form>
     </UserProfile>
   );
 }

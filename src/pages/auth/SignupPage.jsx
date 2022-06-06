@@ -1,27 +1,44 @@
-/* import React, { useState, useContext } from "react";
+import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/auth.context";
+import styled from "styled-components";
 import authService from "../../service/Auth.services";
+import EditMyPicture from "../../components/EditProfile/EditMyPicture";
 
 import EditMySkills from "../../components/EditProfile/EditMySkills";
-import EditMyLinks from "../../components/EditProfile/EditMyLinks"; */
+import EditMyLinks from "../../components/EditProfile/EditMyLinks";
+
+import Button from "../../components/Button";
+
+const Form = styled.form`
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center;
+  align */
+
+  li {
+    list-style-type: none;
+  }
+`;
 
 function Signuppage() {
-  /* const [password, setPassword] = useState("");
+  const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
-  const [image, setImage] = useState("");
+  const [image, setImage] = useState();
   const [fullName, setFullName] = useState("");
-  const [description, setDescription] = useState("");
+  const [description, setDescription] = useState();
   const [location, setLocation] = useState("");
-  const [skills, setSkills] = useState([""]);
-  const [links, setLinks] = useState([""]);
+  const [skills, setSkills] = useState([]);
+  const [links, setLinks] = useState([]);
+
   const [errorMessage, setErrorMessage] = useState(undefined);
   const navigate = useNavigate();
 
-  const { storeToken, autenticateUser } = useContext(AuthContext); */
+  const { storeToken, autenticateUser } = useContext(AuthContext);
 
-  /* const handleUsername = (e) => {
+  const handleUsername = (e) => {
     setUsername(e.target.value);
   };
 
@@ -80,72 +97,70 @@ function Signuppage() {
       .catch((err) => {
         setErrorMessage(err.response.data.errorMessage);
       });
-  }; */
+  };
 
   return (
     <main>
-      <form >
+      <Form onSubmit={handleSubmit}>
+        <EditMyPicture handleImage={handleImage} />
         <label htmlFor="fullName">Full Name*</label>
         <input
           type="text"
-          //value={fullName}
+          value={fullName}
           name="FullName"
-          //onChange={handleFullName}
+          onChange={handleFullName}
         />
         <label htmlFor="username">Username*</label>
         <input
           type="text"
           placeholder="John Doe"
-         // value={username}
+          value={username}
           name="username"
-          //onChange={handleUsername}
+          onChange={handleUsername}
         />
 
         <label htmlFor="email">Email address*</label>
         <input
           type="email"
           placeholder="example@email.com"
-          //value={email}
+          value={email}
           name="email"
-         // onChange={handleEmail}
+          onChange={handleEmail}
         />
 
         <label htmlFor="password">Password*</label>
         <input
           type="password"
-         // value={password}
+          value={password}
           name="password"
-          //onChange={handlePassword}
+          onChange={handlePassword}
         />
 
-        <label htmlFor="image">Image*</label>
-        {/* <input type="text" value={image} name="image" onChange={handleImage} /> */}
-
-        <label htmlFor="description">Description*</label>
+        <label htmlFor="description">Description</label>
         <input
           type="text"
-          //value={description}
+          value={description}
           name="description"
-          //onChange={handleDescription}
+          onChange={handleDescription}
         />
 
         <label htmlFor="location">Location*</label>
         <input
           type="text"
-          //value={location}
+          value={location}
           name="location"
-          //onChange={handleLocation}
+          onChange={handleLocation}
         />
 
-       {/*  <EditMySkills handleSkills={handleSkills} /> */}
+        <EditMySkills handleSkills={handleSkills} />
 
-        {/* <EditMyLinks handleLinks={handleLinks} /> */}
+        <EditMyLinks handleLinks={handleLinks} />
 
-        <button type="submit">Sign Up</button>
-      </form>
-      {/* {errorMessage && <p className="error-message">{errorMessage}</p>}
+        <Button type="submit">Sign Up</Button>
+      </Form>
       <p>Already have an account?</p>
-      <Link to="/login"> Login</Link> */}
+      <Link to="/login"> Login</Link>
+      {errorMessage && <p className="error-message">{errorMessage}</p>}
     </main>
   );
 }

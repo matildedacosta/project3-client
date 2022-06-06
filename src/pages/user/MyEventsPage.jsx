@@ -49,13 +49,13 @@ const Event = styled.section`
 function MyEventsPage() {
   const { id } = useParams();
   const [myEvents, setMyEvents] = useState([]);
-  const { isLoggedIn, user, logoutUser } = useContext(AuthContext);
+  /* const { isLoggedIn, user, logoutUser } = useContext(AuthContext); */
 
   const getMyEvents = async () => {
     try {
       let response = await eventServices.seeMyEvents(id);
       console.log(response.data);
-      setMyEvents(response.data);
+      setMyEvents(response.data.myEvents);
     } catch (error) {
       console.log(error);
     }
@@ -67,11 +67,16 @@ function MyEventsPage() {
 
   const removeEvent = async () => {
     try {
-      let remove = await eventServices.removeMyEvent(id);
+      /* let remove = await */ eventServices.removeMyEvent();
       //setMyEvents();
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    removeEvent(id);
   };
 
   return (
@@ -88,11 +93,14 @@ function MyEventsPage() {
               <Link to={`/event-details/${event._id}`}>
                 <Button>Ver mais</Button>
               </Link>
-              <Button onClick={removeEvent}>x</Button>
+              <form onSubmit={handleSubmit}>
+                <Button type="submit">x</Button>
+              </form>
             </div>
           </div>
         );
       })}
+      {myEvents.length <= 0 && <p>No events yet.</p>}
     </Event>
   );
 }

@@ -19,8 +19,8 @@ class EventService {
     return this.api.get(`/api/events/${eventId}`, this.headers);
   };
 
-  createEvent = async (requestBody) => {
-    return this.api.post("/api/events/create", requestBody, this.headers);
+  createEvent = async (body) => {
+    return this.api.post("/api/events/create", body, this.headers);
   };
 
   updateCurrentEvent = async (requestBody, eventId) => {

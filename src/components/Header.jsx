@@ -5,6 +5,8 @@ import { AuthContext } from "../context/auth.context";
 import styled from "styled-components";
 import userService from "../service/User.services";
 import Button from "./Button";
+import icon from "../assets/pictures/icn2.png";
+import icon2 from "../assets/pictures/icontry.jpg";
 
 const Nav = styled.nav`
   .not-logged-in {
@@ -156,40 +158,22 @@ const Nav = styled.nav`
 
 function Header() {
   const { isLoggedIn, user, logoutUser } = useContext(AuthContext);
-  const [loggedUser, setLoggedUser] = useState("");
-
-  const getUser = async () => {
-    try {
-      let response = await userService.getOneUser(user._id);
-      setLoggedUser(response.data.user);
-      console.log(loggedUser);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    getUser();
-  }, []);
 
   return (
     <Nav>
       {isLoggedIn && (
         <>
-          <section class="top-nav">
+          <section className="top-nav">
             <div className="logo">
               <Link to="/">
-                <img
-                  src="https://cdn-icons-png.flaticon.com/512/282/282151.png"
-                  alt="logo-pic"
-                />
+                <img src={icon2} alt="logo-pic" />
               </Link>
             </div>
             <input id="menu-toggle" type="checkbox" />
-            <label class="menu-button-container" for="menu-toggle">
-              <div class="menu-button"></div>
+            <label className="menu-button-container" htmlFor="menu-toggle">
+              <div className="menu-button"></div>
             </label>
-            <ul class="menu">
+            <ul className="menu">
               <li>
                 <Link to={`/search-users`}>Músicos</Link>
               </li>
@@ -197,7 +181,7 @@ function Header() {
                 <Link to={`search-events`}>Eventos</Link>
               </li>
               <li>
-                <Link to={`profile/${user._id}`}>Profile</Link>
+                <Link to={`profile/${user._id}`}>{user.username}</Link>
               </li>
               <li>
                 <button onClick={logoutUser}>Logout</button>
@@ -210,10 +194,7 @@ function Header() {
         <div className="not-logged-in">
           <div className="logo">
             <Link to="/">
-              <img
-                src="https://cdn-icons-png.flaticon.com/512/282/282151.png"
-                alt="logo-pic"
-              />
+              <img src={icon2} alt="logo-pic" />
             </Link>
           </div>
           <div className="not-logged-in-links">

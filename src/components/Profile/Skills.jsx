@@ -38,7 +38,7 @@ function Skills(props) {
     <UserSkills className="skills">
       <h5>As minhas ligações com a música:</h5>
       <ul>
-        {skills.map((skill) => {
+        {skills.length > 0 && skills.map((skill) => {
           return (
             <div key={skill}>
               <li>{skill}</li>
