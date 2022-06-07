@@ -5,6 +5,7 @@ import { AuthContext } from "../../context/auth.context";
 import EventInfo from "../../components/eventsSearch/EventInfo";
 import styled from "styled-components";
 import Button from "../../components/Button";
+import deleteButton from "../../assets/pictures/bloquear.png";
 
 const Event = styled.section`
   margin-top: 2rem;
@@ -34,7 +35,7 @@ const Event = styled.section`
   }
 
   img {
-    height: 20vh;
+    max-height: 20vh;
     border-radius: 5px;
   }
 
@@ -43,18 +44,35 @@ const Event = styled.section`
     align-items: center;
     justify-content: center;
     gap: 5px;
+    margin: 1rem;
   }
+
+  form button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    border: none;
+  }
+
+  form button img {
+    height: 4vh;
+  }
+
+  /*   .go-back-button {
+    margin-bottom: 1rem;
+  } */
 `;
 
 function MyEventsPage() {
   const { id } = useParams();
   const [myEvents, setMyEvents] = useState([]);
-  /* const { isLoggedIn, user, logoutUser } = useContext(AuthContext); */
+  const { isLoggedIn, user, logoutUser } = useContext(AuthContext);
 
   const getMyEvents = async () => {
     try {
       let response = await eventServices.seeMyEvents(id);
-      console.log(response.data);
+      //console.log(response.data);
       setMyEvents(response.data.myEvents);
     } catch (error) {
       console.log(error);
@@ -65,18 +83,19 @@ function MyEventsPage() {
     getMyEvents();
   }, []);
 
-  const removeEvent = async () => {
+  const removeEvent = async (id) => {
     try {
-      /* let remove = await */ eventServices.removeMyEvent();
-      //setMyEvents();
+      eventServices.removeMyEvent(id);
+      getMyEvents();
     } catch (error) {
       console.log(error);
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e, id) => {
     e.preventDefault();
     removeEvent(id);
+    getMyEvents();
   };
 
   return (
@@ -93,14 +112,32 @@ function MyEventsPage() {
               <Link to={`/event-details/${event._id}`}>
                 <Button>Ver mais</Button>
               </Link>
-              <form onSubmit={handleSubmit}>
-                <Button type="submit">x</Button>
+              <form
+                onSubmit={(e) => {
+                  handleSubmit(e, event._id);
+                }}
+              >
+                <button type="submit">
+                  <img src={deleteButton} alt="delete-button" />
+                </button>
               </form>
             </div>
           </div>
         );
       })}
-      {myEvents.length <= 0 && <p>No events yet.</p>}
+      {myEvents.length <= 0 && (
+        <>
+          <p>Sem eventos.</p>
+          {/* <Link to={`profile/${user._id}`}>
+            <Button>Voltar</Button>
+          </Link> */}
+        </>
+      )}
+      <div className="go-back-button">
+        <Link to={`profile/${user._id}`}>
+          <Button>Voltar</Button>
+        </Link>
+      </div>
     </Event>
   );
 }

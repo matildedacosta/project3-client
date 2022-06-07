@@ -9,7 +9,7 @@ import SearchBar from "../../components/search/SearchBar";
 import SearchFilter from "../../components/search/SearchFilter";
 import SearchCard from "../../components/search/SearchCard";
 
-const SearchUsers = styled.main`
+const SearchUsers = styled.section`
   padding-top: 3rem;
   display: flex;
   flex-direction: column;

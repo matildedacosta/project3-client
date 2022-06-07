@@ -6,7 +6,7 @@ import Main from "../components/Main";
 import OQueOferece from "../components/OQueOferece";
 import Sobre from "../components/Sobre";
 
-const Home = styled.main`
+const Home = styled.section`
   width: 100%;
   hr {
     color: ${({ theme }) => theme.colors.red};

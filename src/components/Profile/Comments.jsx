@@ -21,13 +21,29 @@ const UserComments = styled.section`
 `;
 
 function Comments(props) {
-  const { receivedComments, submitComment } = props;
+  const {
+    receivedComments,
+    userDetails,
+    submitComment,
+    newComments,
+    handleComments,
+  } = props;
 
   return (
     <UserComments>
       <h5>Comentários:</h5>
-      <form onSubmit={submitComment}>
-        <textarea name="comments" id="comments" cols="30" rows="10"></textarea>
+      <form
+        onSubmit={() => {
+          submitComment(userDetails._id);
+        }}
+      >
+        <textarea
+          value={newComments}
+          name="comments"
+          cols="30"
+          rows="5"
+          onChange={handleComments}
+        ></textarea>
         <Button type="submit">Comentar</Button>
       </form>
       <div className="comments">

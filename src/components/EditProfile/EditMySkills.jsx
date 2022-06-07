@@ -1,4 +1,31 @@
 import React from "react";
+import styled from "styled-components";
+
+const Skills = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  ul {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 0;
+    margin: 0;
+  }
+
+  input {
+    max-width: 10vw;
+  }
+
+  label {
+    color: ${({ theme }) => theme.colors.darkGrey};
+  }
+
+  .skills-label {
+    color: ${({ theme }) => theme.colors.red};
+  }
+`;
 
 let skillsArr = [
   "Artista",
@@ -19,14 +46,16 @@ function EditMySkills(props) {
   const { handleSkills } = props;
 
   return (
-    <div>
-      <label htmlFor="skills">Skills*</label>
+    <Skills>
+      <label className="skills-label main-label" htmlFor="skills">
+        Skills*
+      </label>
       <ul>
         {skillsArr.map((skill) => {
           return (
             <li key={skill}>
               <input
-                onChange={handleSkills}
+                onClick={handleSkills}
                 type="checkbox"
                 id={skill}
                 name={skill}
@@ -37,7 +66,7 @@ function EditMySkills(props) {
           );
         })}
       </ul>
-    </div>
+    </Skills>
   );
 }
 

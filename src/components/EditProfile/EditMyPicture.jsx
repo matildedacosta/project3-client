@@ -36,15 +36,15 @@ function EditMyPicture(props) {
   // Call a function (passed as a prop from the parent component)
   // to handle the user-selected file
   const handleChange = (event) => {
-    const fileUploaded = event.target.files[0];
+    const fileUploaded = event.target.file;
     /* props.handleFile(fileUploaded); */
     handleImage(fileUploaded);
   };
 
   return (
     <>
-      <label className="picture-input" htmlFor="picture">
-        Add picture*
+      <label className="picture-input main-label" htmlFor="picture">
+        Add picture
       </label>
       <ImageButton className="button-upload-pic" onClick={handleClick}>
         <img className="upload-pic" src={uploadPic} alt="upload-pic" />

@@ -3,7 +3,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../context/auth.context";
 import styled from "styled-components";
-import userService from "../service/User.services";
 import Button from "./Button";
 import icon from "../assets/pictures/icn2.png";
 import icon2 from "../assets/pictures/icontry.jpg";
@@ -44,7 +43,6 @@ const Nav = styled.nav`
     justify-content: space-between;
     background-color: #00baf0;
     background: ${({ theme }) => theme.colors.red};
-    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     color: #fff;
     height: 50px;
     width: 100%;

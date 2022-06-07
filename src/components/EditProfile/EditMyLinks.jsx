@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import styled from "styled-components";
 
 let linksArr = [
   "Spotify",
@@ -9,23 +10,38 @@ let linksArr = [
   "Portfolio",
 ];
 
-function EditMyLinks(props) {
-  const { handleLinks } = props;
-  return (
-    <div>
-      <label htmlFor="links">Links*</label>
+const Links = styled.div`
+  display: flex;
+  gap: 5px;
 
-      <ul>
-        {linksArr.map((link) => {
-          return (
-            <div key={link}>
-              <label htmlFor={link}>{link}</label>
-              <input onChange={handleLinks} type="text" id={link} name={link} />
-            </div>
-          );
-        })}
-      </ul>
-    </div>
+  label {
+    color: ${({ theme }) => theme.colors.darkGrey};
+    width: 25vw;
+  }
+`;
+
+function EditMyLinks(props) {
+  const { handleLinks, link } = props;
+  const [oneLink, setOneLink] = useState("");
+
+  const handleLink = (e, link) => {
+    setOneLink(e.target.value);
+    handleLinks(link, e.target.value);
+  };
+
+  return (
+    <Links>
+      <>
+        <label htmlFor={link}>{link}</label>
+        <input
+          onChange={(e) => handleLink(e, link)}
+          type="text"
+          id={link}
+          name={link}
+          value={oneLink}
+        />
+      </>
+    </Links>
   );
 }
 

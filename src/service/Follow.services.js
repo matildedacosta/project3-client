@@ -11,12 +11,12 @@ class FollowService {
     this.headers = { headers: { Authorization: `Bearer ${this.storedToken}` } };
   }
 
-  addFollow = (userId) => {
-    return this.api.post(`/api/add-follow/${userId}`, this.headers);
+  addFollow = (id) => {
+    return this.api.post(`/api/add-follow/${id}`, {}, this.headers);
   };
 
-  removeFollow = (userId) => {
-    return this.api.delete(`/api/remove-follow/${userId}`, this.headers);
+  removeFollow = (id) => {
+    return this.api.put(`/api/remove-follow/${id}`, {}, this.headers);
   };
 
   seeFollowers = (userId) => {

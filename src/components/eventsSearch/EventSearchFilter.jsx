@@ -1,3 +1,4 @@
+import { type } from "@testing-library/user-event/dist/type";
 import React from "react";
 import styled from "styled-components";
 
@@ -13,6 +14,7 @@ const FilterDiv = styled.div`
   background-color: ${({ theme }) => theme.colors.weirdWhite};
 
   input {
+    margin-top: 0.5rem;
     height: 2vh;
     width: 35vw;
     border: 0.01rem solid ${({ theme }) => theme.colors.red};
@@ -34,8 +36,30 @@ const FilterDiv = styled.div`
 
   label {
     font-size: 0.7rem;
+    margin-top: 0.5rem;
+  }
+
+  ul {
+    margin: 0.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+  }
+
+  li {
+    padding: 0.2rem;
+    font-size: 0.8rem;
+    list-style-type: none;
+    text-align: center;
+    color: ${({ theme }) => theme.colors.red};
+    background-color: ${({ theme }) => theme.colors.weirdWhite};
+    border: 0.01rem solid ${({ theme }) => theme.colors.red};
+    border-radius: 5px;
   }
 `;
+
+const typeEvent = ["Campo de escrita", "Workshop", "Jam", "Concerto", "Outro"];
 
 function EventSearchFilter() {
   return (
@@ -44,6 +68,11 @@ function EventSearchFilter() {
       <label htmlFor="location">Localidade:</label>
       <input type="text" name="location" />
       <label htmlFor="skills">Tipo:</label>
+      <ul>
+        {typeEvent.map((type) => {
+          return <li key={type}>{type}</li>;
+        })}
+      </ul>
     </FilterDiv>
   );
 }

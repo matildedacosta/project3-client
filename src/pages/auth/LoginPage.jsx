@@ -6,10 +6,10 @@ import axios from "axios";
 import styled from "styled-components";
 import Button from "../../components/Button";
 
-const Login = styled.main`
+const Login = styled.section`
   display: flex;
   flex-direction: column;
-  margin-left: 1.5rem;
+  padding-left: 1.5rem;
   //width: 100%;
 
   Button {
@@ -53,21 +53,6 @@ const Login = styled.main`
     margin-bottom: 1rem;
     width: 20vh;
   }
-
-  /*   button {
-    border-radius: 2px;
-    color: ${({ theme }) => theme.colors.lightBrown};
-    background-color: ${({ theme }) => theme.colors.aquaBlue};
-    border: 0.02rem solid ${({ theme }) => theme.colors.aquaBlue};
-    height: 2.5vh;
-    width: 3vw;
-  }
-
-  button:hover {
-    color: ${({ theme }) => theme.colors.aquaBlue};
-    background-color: ${({ theme }) => theme.colors.lightBrown};
-    border: 0.02rem solid ${({ theme }) => theme.colors.lightBrown};
-  } */
 `;
 
 function LoginPage() {

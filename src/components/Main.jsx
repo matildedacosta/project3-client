@@ -14,13 +14,13 @@ const HomeMain = styled.div`
   /*  background-image: url("${background}");
   background-repeat: no-repeat;
   background-size: cover; */
-  height: 95vh;
+  height: 65vh;
   width: 100%;
 
-  img {
+  /*  img {
     height: 95vh;
     width: 100%;
-  }
+  } */
 
   h1 {
     letter-spacing: 1rem;
@@ -32,8 +32,8 @@ const HomeMain = styled.div`
 function Main() {
   return (
     <HomeMain>
-      <img className="img" src={musitribo} alt="bg-pic" />
-      {/* <h1>MusiTribo</h1> */}
+      {/*  <img className="img" src={musitribo} alt="bg-pic" /> */}
+      <h1>MusiTribo</h1>
     </HomeMain>
   );
 }

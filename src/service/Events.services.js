@@ -28,15 +28,16 @@ class EventService {
   };
 
   removeMyEvent = async (eventId) => {
-    return this.api.delete(`/my-events/${eventId}`, this.headers);
+    return this.api.put(`/api/my-events/${eventId}`, {}, this.headers);
   };
 
-  deleteCurrentEvent = async (eventId) => {
-    return await this.api.delete(`/api/events/${eventId}`, this.headers);
+  deleteCurrentEvent = (id) => {
+    console.log("__________NOPE");
+    return this.api.delete(`/api/events/${id}`, this.headers);
   };
 
-  attendEvent = async (eventId) => {
-    return await this.api.post(`/api/events/${eventId}/attend`, this.headers);
+  attendEvent = (id) => {
+    return this.api.post(`/api/events/${id}/attend`, {}, this.headers);
   };
 
   seeMyEvents = async (userId) => {

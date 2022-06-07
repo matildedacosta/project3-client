@@ -9,7 +9,7 @@ import EventSearchBar from "../../components/eventsSearch/EventSearchBar";
 import EventSearchCard from "../../components/eventsSearch/EventSearchCard";
 import EventSearchFilter from "../../components/eventsSearch/EventSearchFilter";
 
-const SearchEvents = styled.main`
+const SearchEvents = styled.section`
   padding-top: 3rem;
   display: flex;
   flex-direction: column;

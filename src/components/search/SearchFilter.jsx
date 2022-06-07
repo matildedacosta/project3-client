@@ -2,6 +2,21 @@ import styled from "styled-components";
 import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
+const skills = [
+  "Artista",
+  "Cantor(a)",
+  "Compositor(a)",
+  "Guitarrista",
+  "Baixista",
+  "Pianista",
+  "Instrumento de orquestra",
+  "Produtor(a)",
+  "Engenheiro/a som",
+  "Engenheiro/a mistura",
+  "Engenheiro/a masterização",
+  "Outro",
+];
+
 const FilterDiv = styled.div`
   width: 70vw;
   padding: 1rem;
@@ -36,6 +51,25 @@ const FilterDiv = styled.div`
   label {
     font-size: 0.7rem;
   }
+
+  ul {
+    margin: 0.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+  }
+
+  li {
+    padding: 0.2rem;
+    font-size: 0.7rem;
+    list-style-type: none;
+    text-align: center;
+    color: ${({ theme }) => theme.colors.red};
+    background-color: ${({ theme }) => theme.colors.weirdWhite};
+    border: 0.01rem solid ${({ theme }) => theme.colors.red};
+    border-radius: 5px;
+  }
 `;
 
 function SearchFilter() {
@@ -46,7 +80,12 @@ function SearchFilter() {
         <label htmlFor="location">Localidade:</label>
         <input type="text" name="location" />
       </div>
-      <label htmlFor="skills">Tipo:</label>
+      <label htmlFor="skills">Área:</label>
+      <ul>
+        {skills.map((type) => {
+          return <li>{type}</li>;
+        })}
+      </ul>
     </FilterDiv>
   );
 }

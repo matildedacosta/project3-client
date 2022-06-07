@@ -2,14 +2,13 @@ import React from "react";
 import styled from "styled-components";
 
 const UserSkills = styled.section`
-  margin: 0.5rem;
+  //margin: 0.5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 20vh;
 
   h5 {
-    font-size: 1rem;
+    font-size: 0.8rem;
     margin: 0.5rem;
     font-weight: 400;
   }
@@ -38,13 +37,14 @@ function Skills(props) {
     <UserSkills className="skills">
       <h5>As minhas ligações com a música:</h5>
       <ul>
-        {skills.length > 0 && skills.map((skill) => {
-          return (
-            <div key={skill}>
-              <li>{skill}</li>
-            </div>
-          );
-        })}
+        {skills.length > 0 &&
+          skills.map((skill) => {
+            return (
+              <div key={skill}>
+                <li>{skill}</li>
+              </div>
+            );
+          })}
       </ul>
     </UserSkills>
   );

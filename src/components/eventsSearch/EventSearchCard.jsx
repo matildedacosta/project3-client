@@ -11,6 +11,7 @@ const Card = styled.section`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  padding: 1rem;
 
   h6 {
     font-size: 0.6rem;
@@ -46,7 +47,7 @@ function EventSearchCard(props) {
             <h5> {event.name}</h5>
             <h6>{event.location}</h6>
             <Link to={`/event-details/${event._id}`}>
-              <Button>Mais</Button>
+              <Button>Ver mais</Button>
             </Link>
           </div>
         );

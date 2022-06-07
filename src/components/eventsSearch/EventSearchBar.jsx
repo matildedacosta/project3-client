@@ -18,6 +18,10 @@ const SearchDiv = styled.div`
     border-radius: 5px;
     background-color: ${({ theme }) => theme.colors.weirdWhite};
   }
+
+  Button {
+    padding: 0.5rem;
+  }
 `;
 
 function EventSearchBar(props) {
@@ -27,7 +31,7 @@ function EventSearchBar(props) {
     <SearchDiv>
       <label htmlFor="search">Participa</label>
       <input type="text" name="search" value={search} onChange={handleSearch} />
-      <Button>
+      <Button className="button">
         <Link to="/create-event">Criar evento</Link>
       </Button>
     </SearchDiv>

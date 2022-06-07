@@ -2,6 +2,52 @@ import React, { useState, useEffect, useContext } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import followServices from "../../service/Follow.services";
 import { AuthContext } from "../../context/auth.context";
+import styled from "styled-components";
+
+import SearchCard from "../../components/search/SearchCard";
+import Button from "../../components/Button";
+
+const Following = styled.section`
+  color: ${({ theme }) => theme.colors.darkGrey};
+  padding-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  h6 {
+    font-size: 0.6rem;
+  }
+  .user-card {
+    gap: 5px;
+    background-color: ${({ theme }) => theme.colors.weirdWhite};
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem;
+    height: 30vh;
+    width: 40vw;
+    border: 0.01rem solid ${({ theme }) => theme.colors.red};
+    border-radius: 5px;
+  }
+
+  .user-card img {
+    height: 15vh;
+  }
+
+  .no-following {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .no-following Button {
+    width: 20vw;
+  }
+`;
 
 function FollowingPage() {
   const [myFollowing, setMyFollowing] = useState([]);
@@ -22,20 +68,32 @@ function FollowingPage() {
   }, []);
 
   return (
-    <div>
-      {myFollowing == 0 && (
-        <div>
+    <Following>
+      {myFollowing.length == 0 && (
+        <div className="no-following">
           <p>Ainda não segues ninguém. Cria a tua tribo:</p>
           <Link to="/search-users">
-            <button>Músicos</button>
+            <Button>Músicos</Button>
           </Link>
         </div>
       )}
-      {myFollowing > 0 &&
-        myFollowing.map((following) => {
-          return <h1>{following.username}</h1>;
+      {myFollowing.length > 0 &&
+        myFollowing.map((user) => {
+          return (
+            <>
+              <h3>A seguir</h3>
+              <div className="user-card" key={user._id}>
+                <img src={user.image} alt="user-img" />
+                <h5> {user.username}</h5>
+                <h6>{user.location}</h6>
+                <Link to={`/user-details/${user._id}`}>
+                  <Button>Ver mais</Button>
+                </Link>
+              </div>
+            </>
+          );
         })}
-    </div>
+    </Following>
   );
 }
 

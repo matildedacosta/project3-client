@@ -6,7 +6,7 @@ const User = styled.main`
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 40vh;
+  min-height: 35vh;
 
   h4 {
     font-size: 0.8rem;
@@ -20,12 +20,14 @@ const User = styled.main`
   }
 
   h5 {
-    font-size: 0.9rem;
+    padding-top: 0.2rem;
+    font-size: 0.8rem;
     font-weight: 300;
   }
 
   p {
     font-size: 0.9rem;
+    padding-top: 0.5rem;
   }
 
   .profile-img {

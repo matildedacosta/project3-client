@@ -16,7 +16,7 @@ const UserSkills = styled.section`
   gap: 10px;
   justify-content: center;
   align-items: center;
-  height: 20vh;
+  //height: 20vh;
 
   .link-icons {
     height: 3vh;
@@ -25,6 +25,7 @@ const UserSkills = styled.section`
 
 function Links(props) {
   const { links } = props;
+  //console.log(links);
 
   return (
     <UserSkills className="user-links">

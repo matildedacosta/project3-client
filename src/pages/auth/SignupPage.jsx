@@ -10,6 +10,24 @@ import EditMyLinks from "../../components/EditProfile/EditMyLinks";
 
 import Button from "../../components/Button";
 
+let linksArr = [
+  "Spotify",
+  "SoundCloud",
+  "Youtube",
+  "Instagram",
+  "Facebook",
+  "Portfolio",
+];
+
+let linksObj = {
+  spotify: "",
+  soundCloud: "",
+  youtube: "",
+  instagram: "",
+  facebook: "",
+  portfolio: "",
+};
+
 const Form = styled.form`
   padding: 1rem;
   display: flex;
@@ -31,12 +49,10 @@ function Signuppage() {
   const [description, setDescription] = useState();
   const [location, setLocation] = useState("");
   const [skills, setSkills] = useState([]);
-  const [links, setLinks] = useState([]);
+  const [links, setLinks] = useState(linksObj);
 
   const [errorMessage, setErrorMessage] = useState(undefined);
   const navigate = useNavigate();
-
-  const { storeToken, autenticateUser } = useContext(AuthContext);
 
   const handleUsername = (e) => {
     setUsername(e.target.value);
@@ -67,11 +83,17 @@ function Signuppage() {
   };
 
   const handleSkills = (e) => {
-    setSkills(e.target.check);
+    if (skills.includes(e.target.value)) return;
+    let skillsCopy = [...skills, e.target.value];
+    setSkills(skillsCopy);
   };
 
-  const handleLinks = (e) => {
-    setLinks(e.target.value);
+  const handleLinks = (link, value) => {
+    let linksCopy = { ...links };
+
+    linksCopy[link.toLowerCase()] = value;
+    console.log(linksCopy);
+    setLinks(linksCopy);
   };
 
   const handleSubmit = (e) => {
@@ -118,7 +140,6 @@ function Signuppage() {
           name="username"
           onChange={handleUsername}
         />
-
         <label htmlFor="email">Email address*</label>
         <input
           type="email"
@@ -127,7 +148,6 @@ function Signuppage() {
           name="email"
           onChange={handleEmail}
         />
-
         <label htmlFor="password">Password*</label>
         <input
           type="password"
@@ -135,7 +155,6 @@ function Signuppage() {
           name="password"
           onChange={handlePassword}
         />
-
         <label htmlFor="description">Description</label>
         <input
           type="text"
@@ -143,7 +162,6 @@ function Signuppage() {
           name="description"
           onChange={handleDescription}
         />
-
         <label htmlFor="location">Location*</label>
         <input
           type="text"
@@ -151,11 +169,13 @@ function Signuppage() {
           name="location"
           onChange={handleLocation}
         />
-
         <EditMySkills handleSkills={handleSkills} />
-
-        <EditMyLinks handleLinks={handleLinks} />
-
+        <label htmlFor="links">Links*</label>
+        {linksArr.map((link) => {
+          return (
+            <EditMyLinks handleLinks={handleLinks} link={link} key={link} />
+          );
+        })}
         <Button type="submit">Sign Up</Button>
       </Form>
       <p>Already have an account?</p>
