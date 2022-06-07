@@ -14,6 +14,16 @@ const SearchUsers = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  @media (min-width: 700px) {
+    //display: flex;
+    .users-filter-and-card {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      width: 80vw;
+    }
+  }
 `;
 
 function SearchUsersPage(props) {
@@ -49,9 +59,11 @@ function SearchUsersPage(props) {
     <SearchUsers>
       <SearchBar handleSearch={handleSearch} search={search} />
 
-      <SearchFilter />
+      <div className="users-filter-and-card">
+        <SearchFilter className="filter-div" />
 
-      <SearchCard users={users} />
+        <SearchCard users={users} />
+      </div>
     </SearchUsers>
   );
 }

@@ -57,6 +57,30 @@ const FilterDiv = styled.div`
     border: 0.01rem solid ${({ theme }) => theme.colors.red};
     border-radius: 5px;
   }
+
+  @media (min-width: 700px) {
+    margin: 3rem;
+    width: 20vw;
+    height: 32vh;
+    gap: 10px;
+
+    h6 {
+      font-size: 1rem;
+    }
+
+    input {
+      width: 10vw;
+    }
+
+    label {
+      font-size: 1rem;
+    }
+
+    li {
+      padding: 0.5rem;
+      font-size: 0.8rem;
+    }
+  }
 `;
 
 const typeEvent = ["Campo de escrita", "Workshop", "Jam", "Concerto", "Outro"];

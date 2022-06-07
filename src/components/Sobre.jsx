@@ -18,6 +18,22 @@ const SobreMusiTribo = styled.section`
     font-size: 0.65rem;
     line-height: 1.5rem;
   }
+
+  @media (min-width: 700px) {
+    padding: 3rem;
+    font-size: 1rem;
+    height: 70vh;
+
+    h2 {
+      font-size: 2rem;
+    }
+
+    p {
+      font-size: 1rem;
+      line-height: 4rem;
+      width: 70vw;
+    }
+  }
 `;
 
 function Sobre() {

@@ -15,6 +15,7 @@ const Card = styled.section`
   h6 {
     font-size: 0.6rem;
   }
+
   .user-card {
     gap: 5px;
     background-color: ${({ theme }) => theme.colors.weirdWhite};
@@ -31,6 +32,39 @@ const Card = styled.section`
 
   .user-card img {
     height: 15vh;
+  }
+
+  @media (min-width: 700px) {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    h5 {
+      margin: 1rem 0 0.5rem 0;
+      font-size: 1.4rem;
+    }
+
+    h6 {
+      margin-bottom: 1rem;
+      font-size: 1rem;
+      font-weight: 400;
+    }
+
+    .user-card {
+      width: 20vw;
+      height: 40vh;
+    }
+
+    .all-users-cards {
+      height: 10vh;
+      overflow-y: scroll;
+    }
+
+    Button {
+      width: 5vw;
+      height: 3vh;
+      font-size: 0.8rem;
+    }
   }
 `;
 

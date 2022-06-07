@@ -14,6 +14,16 @@ const SearchEvents = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  @media (min-width: 700px) {
+    //display: flex;
+    .events-filter-and-card {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      width: 80vw;
+    }
+  }
 `;
 
 function SearchEventsPage() {
@@ -47,8 +57,11 @@ function SearchEventsPage() {
   return (
     <SearchEvents>
       <EventSearchBar handleSearch={handleSearch} search={search} />
-      <EventSearchFilter />
-      <EventSearchCard events={events} />
+
+      <div className="events-filter-and-card">
+        <EventSearchFilter />
+        <EventSearchCard events={events} />
+      </div>
     </SearchEvents>
   );
 }

@@ -7,6 +7,8 @@ import evento from "../assets/pictures/evento.png";
 import tribo from "../assets/pictures/tenda-da-tribo.png";
 import music from "../assets/pictures/followmusic.jpg";
 
+import musicscreen from "../assets/pictures/background3.jpg";
+
 const Features = styled.section`
   font-size: 0.6rem;
   //height: 30vh;
@@ -22,7 +24,7 @@ const Features = styled.section`
   }
 
   .encontraras-img img {
-    height: 27vh;
+    max-height: 27vh;
     border-radius: 5px;
     margin-right: 2rem;
   }
@@ -60,6 +62,54 @@ const Features = styled.section`
     justify-content: center;
     width: 40vw;
   }
+
+  #pc-img {
+    display: none;
+  }
+
+  @media (min-width: 700px) {
+    padding: 3rem;
+    font-size: 1rem;
+    height: 50vh;
+
+    h2 {
+      font-size: 2rem;
+    }
+
+    .feature-info {
+      gap: 5px;
+    }
+
+    .icon {
+      height: 5vh;
+      margin-right: 2rem;
+    }
+
+    p {
+      font-size: 0.9rem;
+    }
+
+    .features-info {
+      padding: 5rem;
+    }
+    #pc-img {
+      display: flex;
+      width: 25vw;
+      height: 60vh;
+      margin-left: 15rem;
+    }
+
+    #phone-img {
+      display: none;
+    }
+
+    .features {
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+      margin-left: 10rem;
+    }
+  }
 `;
 
 function OQueOferece() {
@@ -69,7 +119,8 @@ function OQueOferece() {
 
       <div className="features-info">
         <div className="encontraras-img">
-          <img src={music} alt="music" />
+          <img id="phone-img" src={music} alt="music" />
+          <img id="pc-img" src={musicscreen} alt="music" />
         </div>
         <div className="features">
           <article>

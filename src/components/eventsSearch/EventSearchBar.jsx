@@ -22,6 +22,24 @@ const SearchDiv = styled.div`
   Button {
     padding: 0.5rem;
   }
+
+  @media (min-width: 700px) {
+    font-size: 1rem;
+    font-weight: 550;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    input {
+      height: 2.5vh;
+    }
+
+    Button {
+      width: 5vw;
+      height: 3vh;
+      font-size: 0.8rem;
+    }
+  }
 `;
 
 function EventSearchBar(props) {

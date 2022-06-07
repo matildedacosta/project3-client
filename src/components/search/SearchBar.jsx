@@ -17,6 +17,18 @@ const SearchDiv = styled.div`
     border-radius: 5px;
     background-color: ${({ theme }) => theme.colors.weirdWhite};
   }
+
+  @media (min-width: 700px) {
+    font-size: 1rem;
+    font-weight: 550;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    input {
+      height: 2.5vh;
+    }
+  }
 `;
 
 function SearchBar(props) {

@@ -11,21 +11,30 @@ const HomeMain = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  /*  background-image: url("${background}");
-  background-repeat: no-repeat;
-  background-size: cover; */
-  height: 65vh;
+  height: 85vh;
   width: 100%;
 
-  /*  img {
+  h1 {
+    letter-spacing: 1rem;
+    font-size: 5rem;
+    color: ${({ theme }) => theme.colors.red};
+  }
+
+  @media (max-width: 700px) {
+    height: 65vh;
+    /*  background-image: url("${background}");
+  background-repeat: no-repeat;
+  background-size: cover; */
+
+    /*  img {
     height: 95vh;
     width: 100%;
   } */
 
-  h1 {
-    letter-spacing: 1rem;
-    font-size: 2rem;
-    color: ${({ theme }) => theme.colors.red};
+    h1 {
+      letter-spacing: 1rem;
+      font-size: 2rem;
+    }
   }
 `;
 

@@ -31,7 +31,47 @@ const Card = styled.section`
   }
 
   .event-card img {
-    height: 15vh;
+    max-height: 15vh;
+    width: 30vw;
+    border-radius: 5px;
+  }
+
+  @media (min-width: 700px) {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    h5 {
+      margin: 1rem 0 0.5rem 0;
+      font-size: 1.4rem;
+    }
+
+    h6 {
+      margin-bottom: 1rem;
+      font-size: 1rem;
+      font-weight: 400;
+    }
+
+    .event-card {
+      width: 20vw;
+      height: 40vh;
+    }
+
+    .all-events-cards {
+      height: 10vh;
+      overflow-y: scroll;
+    }
+
+    .event-card img {
+      max-height: 15vh;
+      width: 10vw;
+    }
+
+    Button {
+      width: 5vw;
+      height: 3vh;
+      font-size: 0.8rem;
+    }
   }
 `;
 
@@ -39,7 +79,7 @@ function EventSearchCard(props) {
   const { events } = props;
 
   return (
-    <Card>
+    <Card className="all-events-cards">
       {events.map((event) => {
         return (
           <div className="event-card" key={event._id}>

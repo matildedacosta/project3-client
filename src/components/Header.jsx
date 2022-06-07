@@ -8,18 +8,31 @@ import icon from "../assets/pictures/icn2.png";
 import icon2 from "../assets/pictures/icontry.jpg";
 
 const Nav = styled.nav`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: ${({ theme }) => theme.colors.red};
+
+  .button-li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   .not-logged-in {
-    padding: 1rem;
+    //padding: 1rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding: 0.5rem 5rem;
     width: 100%;
     background-color: ${({ theme }) => theme.colors.red};
   }
 
   Button {
-    width: 20vw;
-    height: 5vh;
+    min-width: 5vw;
+    height: 3vh;
     background-color: ${({ theme }) => theme.colors.weirdWhite};
     color: ${({ theme }) => theme.colors.red};
     border: none;
@@ -29,6 +42,10 @@ const Nav = styled.nav`
   .not-logged-in-links {
     display: flex;
     gap: 5px;
+  }
+
+  .logo {
+    margin-left: 5rem;
   }
 
   .logo img {
@@ -41,8 +58,6 @@ const Nav = styled.nav`
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    background-color: #00baf0;
-    background: ${({ theme }) => theme.colors.red};
     color: #fff;
     height: 50px;
     width: 100%;
@@ -53,13 +68,17 @@ const Nav = styled.nav`
     display: flex;
     flex-direction: row;
     list-style-type: none;
-    margin: 0;
+    margin-right: 5rem;
     padding: 0;
   }
 
   .menu > li {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin: 0 1rem;
     overflow: hidden;
+    font-size: 1.1rem;
   }
 
   .menu-button-container {
@@ -113,6 +132,12 @@ const Nav = styled.nav`
   }
 
   @media (max-width: 700px) {
+    width: 100%;
+    Button {
+      min-width: 15vw;
+      height: 3vh;
+    }
+
     .menu-button-container {
       display: flex;
     }
@@ -181,7 +206,7 @@ function Header() {
               <li>
                 <Link to={`profile/${user._id}`}>{user.username}</Link>
               </li>
-              <li>
+              <li className="button-li">
                 <button onClick={logoutUser}>Logout</button>
               </li>
             </ul>
