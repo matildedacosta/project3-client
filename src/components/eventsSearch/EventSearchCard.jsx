@@ -16,6 +16,7 @@ const Card = styled.section`
   h6 {
     font-size: 0.6rem;
   }
+
   .event-card {
     gap: 5px;
     background-color: ${({ theme }) => theme.colors.weirdWhite};
@@ -40,6 +41,8 @@ const Card = styled.section`
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    height: 85vh;
+    overflow-y: scroll;
 
     h5 {
       margin: 1rem 0 0.5rem 0;
@@ -57,10 +60,10 @@ const Card = styled.section`
       height: 40vh;
     }
 
-    .all-events-cards {
+    /*  .all-events-cards {
       height: 10vh;
       overflow-y: scroll;
-    }
+    } */
 
     .event-card img {
       max-height: 15vh;
@@ -86,6 +89,7 @@ function EventSearchCard(props) {
             <img src={event.image} alt="event-img" />
             <h5> {event.name}</h5>
             <h6>{event.location}</h6>
+            <h6>{event.typeOfEvent}</h6>
             <Link to={`/event-details/${event._id}`}>
               <Button>Ver mais</Button>
             </Link>

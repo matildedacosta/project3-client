@@ -30,6 +30,14 @@ const Buttons = styled.section`
     color: ${({ theme }) => theme.colors.yellow};
     background-color: ${({ theme }) => theme.colors.mint};
   }
+
+  @media (min-width: 700px) {
+    Button {
+      height: 4vh;
+      width: 6vw;
+      font-size: 1rem;
+    }
+  }
 `;
 
 function UserButtons(props) {

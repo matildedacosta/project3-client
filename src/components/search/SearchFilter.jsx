@@ -72,10 +72,12 @@ const FilterDiv = styled.div`
   }
 
   @media (min-width: 700px) {
-    margin: 3rem;
+    align-items: flex-start;
+    justify-content: flex-start;
     width: 20vw;
-    height: 32vh;
-    gap: 10px;
+    height: 45vh;
+    //gap: 5px;
+    margin-top: 3rem;
 
     h6 {
       font-size: 1rem;
@@ -107,7 +109,7 @@ function SearchFilter() {
       <label htmlFor="skills">Área:</label>
       <ul>
         {skills.map((type) => {
-          return <li>{type}</li>;
+          return <li key={type}>{type}</li>;
         })}
       </ul>
     </FilterDiv>

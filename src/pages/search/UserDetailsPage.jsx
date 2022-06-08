@@ -17,11 +17,132 @@ const UserProfile = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: 100vh;
 
-  .follow-button Button {
+  .edit-profile {
+    display: none;
+  }
+
+  .follow-button button {
     margin-top: 0.5rem;
     color: ${({ theme }) => theme.colors.red};
     background-color: ${({ theme }) => theme.colors.yellow};
+  }
+
+  .user-comments {
+    max-height: 20vh;
+    overflow-y: scroll;
+  }
+
+  .user-comments h4 {
+    color: ${({ theme }) => theme.colors.darkGrey};
+    text-align: center;
+    padding: 1.2rem 0.9rem 0.6rem 0;
+    font-size: 0.9rem;
+    font-weight: 400;
+  }
+
+  .one-comment {
+    margin: 0.5rem;
+    padding: 0.5rem;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    background-color: ${({ theme }) => theme.colors.yellow};
+    border: 0.02rem solid ${({ theme }) => theme.colors.red};
+    width: 50vw;
+    min-height: 5vh;
+    border-radius: 5px;
+    gap: 5px;
+  }
+
+  .follow-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .follow-button button {
+    height: 3vh;
+    width: 15vw;
+    border: none;
+    color: ${({ theme }) => theme.colors.red};
+    background-color: ${({ theme }) => theme.colors.yellow};
+    border-radius: 5px;
+  }
+
+  h6 {
+    font-size: 0.6rem;
+  }
+
+  form button {
+    background-color: ${({ theme }) => theme.colors.yellow};
+    color: ${({ theme }) => theme.colors.red};
+    border: none;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    width: 40vw;
+    height: 3vh;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  textarea {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0.5rem;
+    border: 0.05rem solid ${({ theme }) => theme.colors.yellow};
+  }
+
+  @media (min-width: 700px) {
+    .user-comments h4 {
+      font-size: 1rem;
+    }
+
+    .info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .user-comments {
+      margin-top: 1rem;
+      /*  display: flex;
+      //flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap; */
+      max-height: 20vh;
+      overflow-y: scroll;
+    }
+
+    .follow-button button {
+      height: 3vh;
+      width: 4vw;
+      font-size: 0.9rem;
+    }
+
+    .one-comment {
+      padding: 0.5rem;
+      width: 20vw;
+      min-height: 5vh;
+      border-radius: 5px;
+      gap: 5px;
+    }
+
+    textarea {
+      width: 30vw;
+      height: 10vh;
+    }
+
+    form button {
+      width: 10vw;
+    }
   }
 `;
 
@@ -32,8 +153,9 @@ function UserDetailsPage() {
   const [links, setLinks] = useState({});
   const [receivedComments, setComments] = useState([]);
   const [newComments, setNewComments] = useState("");
-  const [follow, setFollow] = useState(false);
+  const [follow, setFollow] = useState();
   const [loggedUser, setLoggedUser] = useState();
+  const [paramsId, setParamsId] = useState("");
 
   //console.log(links);
 
@@ -43,7 +165,11 @@ function UserDetailsPage() {
 
   const addFollow = async (id) => {
     try {
+      setFollow(false);
       await followService.addFollow(id);
+      console.log("clButton", follow);
+      //change button
+      getUser();
     } catch (err) {
       console.log(err);
     }
@@ -51,23 +177,11 @@ function UserDetailsPage() {
 
   const removeFollow = async (id) => {
     try {
-      let unfollow = await followService.removeFollow(id);
+      console.log("click", follow);
+      setFollow(true);
+      await followService.removeFollow(id);
     } catch (err) {
       console.log(err);
-    }
-  };
-
-  const followToggle = async (id) => {
-    let response = await userService.getOneUser(user._id);
-    console.log(response.data.user.following, id);
-    if (response.data.user.following.some((user) => user._id == id)) {
-      setFollow(true);
-      removeFollow(id);
-      console.log("following");
-    } else {
-      setFollow(false);
-      addFollow(id);
-      console.log("not following");
     }
   };
 
@@ -79,6 +193,12 @@ function UserDetailsPage() {
       setSkills(response.data.user.skills);
       setLinks(response.data.user.links);
       setComments(response.data.user.receivedComments);
+      setParamsId(response.data.user._id);
+      console.log(response.data.user.receivedComments);
+
+      if (response.data.user.followers.includes(user._id)) {
+        setFollow(false);
+      } else return setFollow(true);
     } catch (error) {
       console.log(error);
     }
@@ -92,12 +212,12 @@ function UserDetailsPage() {
     setNewComments(e.target.value);
   };
 
-  const submitComment = (e) => {
-    e.preventDefault();
-    const body = { newComments };
-
+  const submitComment = async (e, id) => {
     try {
-      commentService.addComment(id, body);
+      e.preventDefault();
+      const body = { newComments };
+      await commentService.addComment(id, body);
+      console.log(body);
       setNewComments("");
     } catch (error) {
       console.log(error);
@@ -107,33 +227,59 @@ function UserDetailsPage() {
   return (
     <UserProfile>
       <UserInfo user={userDetails} />
-      {/*  <div className="follow-button">
-        <Button
-          onClick={() => {
-            addFollow(id);
-          }}
-        >
-          Follow
-        </Button>
-      </div> */}
-      <div className="follow-button">
-        <button
-          onClick={() => {
-            followToggle(id);
-          }}
-        >
-          toggle follow
-        </button>
+      <div className="info">
+        <div className="follow-button">
+          {follow === true && (
+            <button
+              onClick={() => {
+                addFollow(id);
+              }}
+            >
+              Seguir
+            </button>
+          )}
+          {follow === false && (
+            <button
+              onClick={() => {
+                removeFollow(id);
+              }}
+            >
+              Deixar de Seguir
+            </button>
+          )}
+        </div>
+
+        <Skills skills={skills} />
+        <Links links={links} />
       </div>
-      <Skills skills={skills} />
-      <Links links={links} />
-      <Comments
-        userDetails={userDetails}
-        newComments={newComments}
-        submitComment={submitComment}
-        receivedComments={receivedComments}
-        handleComments={handleComments}
-      />
+      <form
+        onSubmit={(paramsId) => {
+          submitComment(paramsId);
+        }}
+      >
+        <textarea
+          value={newComments}
+          name="comments"
+          cols="30"
+          rows="5"
+          onChange={handleComments}
+        ></textarea>
+        <button type="submit">Comentar</button>
+      </form>
+
+      <section className="user-comments">
+        <h4>Comentários:</h4>
+        {receivedComments.map((el) => {
+          return (
+            <div className="one-comment" key={el._id}>
+              <p>{el.comment}</p>
+              <h5>
+                <b>Por</b> {el.commentBy.username}
+              </h5>
+            </div>
+          );
+        })}
+      </section>
     </UserProfile>
   );
 }

@@ -43,7 +43,7 @@ let skillsArr = [
 ];
 
 function EditMySkills(props) {
-  const { handleSkills } = props;
+  const { handleSkills, skills } = props;
 
   return (
     <Skills>
@@ -60,6 +60,7 @@ function EditMySkills(props) {
                 id={skill}
                 name={skill}
                 value={skill}
+                check={skills}
               />
               <label htmlFor={skill}>{skill}</label>
             </li>

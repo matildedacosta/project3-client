@@ -32,6 +32,7 @@ const Form = styled.form`
   padding: 1rem;
   display: flex;
   flex-direction: column;
+  height: 100%;
   /* justify-content: center;
   align */
 
@@ -124,7 +125,7 @@ function Signuppage() {
   return (
     <main>
       <Form onSubmit={handleSubmit}>
-        <EditMyPicture handleImage={handleImage} />
+        {/*    <EditMyPicture handleImage={handleImage} /> */}
         <label htmlFor="fullName">Full Name*</label>
         <input
           type="text"

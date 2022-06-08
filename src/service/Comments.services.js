@@ -11,10 +11,10 @@ class CommentService {
     this.headers = { headers: { Authorization: `Bearer ${this.storedToken}` } };
   }
 
-  addComment = async (userId, requestBody) => {
-    return this.api.post(
+  addComment = async (userId, body) => {
+    return await this.api.post(
       `/api/profile/${userId}/add-comment`,
-      requestBody,
+      body,
       this.headers
     );
   };

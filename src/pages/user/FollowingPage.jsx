@@ -13,7 +13,8 @@ const Following = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  //justify-content: center;
+  height: 90vh;
 
   h6 {
     font-size: 0.6rem;
@@ -46,6 +47,54 @@ const Following = styled.section`
 
   .no-following Button {
     width: 20vw;
+  }
+
+  @media (min-width: 700px) {
+    display: flex;
+    flex-wrap: wrap;
+
+    h3 {
+      font-size: 2rem;
+      margin: 1rem;
+    }
+
+    h5 {
+      margin: 1rem 0 0.5rem 0;
+      font-size: 1.4rem;
+    }
+
+    h6 {
+      margin-bottom: 1rem;
+      font-size: 1rem;
+      font-weight: 400;
+    }
+
+    .user-card {
+      width: 20vw;
+      height: 40vh;
+    }
+
+    .all-users-cards {
+      height: 10vh;
+      overflow-y: scroll;
+    }
+
+    Button {
+      width: 5vw;
+      height: 3vh;
+      font-size: 0.8rem;
+    }
+
+    .no-following {
+      margin-top: 2rem;
+      gap: 30px;
+    }
+
+    .no-following Button {
+      width: 8vw;
+      height: 3vh;
+      font-size: 1rem;
+    }
   }
 `;
 

@@ -12,7 +12,7 @@ const Event = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 40vh;
+  height: 90vh;
 
   h4 {
     font-size: 0.8rem;
@@ -59,9 +59,23 @@ const Event = styled.section`
     height: 4vh;
   }
 
-  /*   .go-back-button {
-    margin-bottom: 1rem;
-  } */
+  @media (min-width: 700px) {
+    .all-events {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+
+    .event-card {
+      margin: 5rem;
+    }
+
+    /*  .go-back-button {
+      align-self: flex-end;
+    } */
+  }
 `;
 
 function MyEventsPage() {
@@ -100,31 +114,33 @@ function MyEventsPage() {
 
   return (
     <Event>
-      {myEvents.map((event) => {
-        return (
-          <div key={event._id} className="event-card">
-            <img src={event.image} alt="event-img" />
-            <h4>{event.name}</h4>
-            <h5>Responsável: @{event.creator.username}</h5>
-            <h6>{event.location}</h6>
-            <h6>{event.date}</h6>
-            <div className="my-event-buttons">
-              <Link to={`/event-details/${event._id}`}>
-                <Button>Ver mais</Button>
-              </Link>
-              <form
-                onSubmit={(e) => {
-                  handleSubmit(e, event._id);
-                }}
-              >
-                <button type="submit">
-                  <img src={deleteButton} alt="delete-button" />
-                </button>
-              </form>
+      <div className="all-events">
+        {myEvents.map((event) => {
+          return (
+            <div key={event._id} className="event-card">
+              <img src={event.image} alt="event-img" />
+              <h4>{event.name}</h4>
+              <h5>Responsável: @{event.creator.username}</h5>
+              <h6>{event.location}</h6>
+              <h6>{event.date}</h6>
+              <div className="my-event-buttons">
+                <Link to={`/event-details/${event._id}`}>
+                  <Button>Ver mais</Button>
+                </Link>
+                <form
+                  onSubmit={(e) => {
+                    handleSubmit(e, event._id);
+                  }}
+                >
+                  <button type="submit">
+                    <img src={deleteButton} alt="delete-button" />
+                  </button>
+                </form>
+              </div>
             </div>
-          </div>
-        );
-      })}
+          );
+        })}
+      </div>
       {myEvents.length <= 0 && (
         <>
           <p>Sem eventos.</p>
@@ -133,6 +149,7 @@ function MyEventsPage() {
           </Link> */}
         </>
       )}
+
       <div className="go-back-button">
         <Link to={`profile/${user._id}`}>
           <Button>Voltar</Button>

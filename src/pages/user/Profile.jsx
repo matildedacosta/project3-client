@@ -19,6 +19,8 @@ const UserProfile = styled.section`
   flex-direction: column;
   align-items: center;
   gap: 10px;
+  height: 100vh;
+  padding-bottom: 3rem;
 
   /* Button {
     margin-bottom: 0.5rem;
@@ -42,6 +44,20 @@ const UserProfile = styled.section`
     justify-content: center;
     width: 30vw;
     height: 2vh;
+  }
+
+  @media (min-width: 700px) {
+    .delete-button Button {
+      height: 4vh;
+      width: 10vw;
+      font-size: 1rem;
+    }
+
+    .edit-profile Button {
+      height: 4vh;
+      width: 5vw;
+      font-size: 1rem;
+    }
   }
 `;
 
@@ -79,13 +95,13 @@ function Profile() {
   return (
     <UserProfile>
       <UserInfo user={user} />
-      <div className="edit-profile">
+      {/*  <div className="edit-profile">
         <Link to={`/edit-profile/${user._id}`}>
           <Button>Editar</Button>
         </Link>
-      </div>
+      </div> */}
       <Skills skills={skills} />
-      {links > 0 && <Links links={links} />}
+      <Links links={links} />
 
       <UserButtons user={user} />
       <form

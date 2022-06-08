@@ -10,7 +10,7 @@ import link from "../../assets/pictures/link.png";
 import spotify from "../../assets/pictures/spotify.png";
 
 const UserSkills = styled.section`
-  margin: 0.5rem;
+  margin-top: 1rem;
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
@@ -20,6 +20,14 @@ const UserSkills = styled.section`
 
   .link-icons {
     height: 3vh;
+  }
+
+  @media (min-width: 700px) {
+    margin: 1rem 0;
+    .link-icons {
+      height: 4vh;
+      margin: 0.5rem;
+    }
   }
 `;
 

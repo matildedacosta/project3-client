@@ -14,6 +14,8 @@ const SearchEvents = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: 90vh;
+  overflow-y: scroll;
 
   @media (min-width: 700px) {
     //display: flex;

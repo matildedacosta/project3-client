@@ -18,6 +18,31 @@ const UserComments = styled.section`
   .comments {
     margin: 0.5rem;
   }
+
+  @media (min-width: 700px) {
+    margin: 1rem 0;
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    h5 {
+      font-size: 1rem;
+    }
+
+    textarea {
+      height: 20vh;
+      width: 40vw;
+    }
+
+    Button {
+      font-size: 0.9rem;
+      width: 40vw;
+      height: 3vh;
+    }
+  }
 `;
 
 function Comments(props) {
@@ -32,9 +57,10 @@ function Comments(props) {
   return (
     <UserComments>
       <h5>Comentários:</h5>
-      <form
+       <form
         onSubmit={() => {
           submitComment(userDetails._id);
+          console.log(userDetails);
         }}
       >
         <textarea
@@ -49,7 +75,7 @@ function Comments(props) {
       <div className="comments">
         {receivedComments.map((comment) => {
           return (
-            <div>
+            <div key={comment._id}>
               <p>{comment.comment}</p>
               <h6>{comment.commentBy}</h6>
             </div>

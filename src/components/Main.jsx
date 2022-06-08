@@ -11,20 +11,29 @@ const HomeMain = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   height: 85vh;
   width: 100%;
+  background-image: url("${background}");
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-family: "Rock Salt", cursive;
 
   h1 {
     letter-spacing: 1rem;
-    font-size: 5rem;
+    font-size: 6rem;
     color: ${({ theme }) => theme.colors.red};
+    font-weight: 900;
+  }
+
+  h2 {
+    font-size: 1rem;
+    font-style: italic;
+    color: ${({ theme }) => theme.colors.darkGrey};
   }
 
   @media (max-width: 700px) {
     height: 65vh;
-    /*  background-image: url("${background}");
-  background-repeat: no-repeat;
-  background-size: cover; */
 
     /*  img {
     height: 95vh;
@@ -35,6 +44,10 @@ const HomeMain = styled.div`
       letter-spacing: 1rem;
       font-size: 2rem;
     }
+
+    h2 {
+      font-size: 0.7rem;
+    }
   }
 `;
 
@@ -43,6 +56,11 @@ function Main() {
     <HomeMain>
       {/*  <img className="img" src={musitribo} alt="bg-pic" /> */}
       <h1>MusiTribo</h1>
+      <h2>a tocar na mesma vibração.</h2>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Mansalva&family=Rock+Salt&display=swap"
+        rel="stylesheet"
+      ></link>
     </HomeMain>
   );
 }

@@ -133,6 +133,7 @@ const Nav = styled.nav`
 
   @media (max-width: 700px) {
     width: 100%;
+
     Button {
       min-width: 15vw;
       height: 3vh;
@@ -141,6 +142,7 @@ const Nav = styled.nav`
     .menu-button-container {
       display: flex;
     }
+
     .menu {
       position: absolute;
       top: 0;
@@ -151,6 +153,7 @@ const Nav = styled.nav`
       justify-content: center;
       align-items: center;
     }
+
     #menu-toggle ~ .menu li {
       height: 0;
       margin: 0;
@@ -158,12 +161,14 @@ const Nav = styled.nav`
       border: 0;
       transition: height 400ms cubic-bezier(0.23, 1, 0.32, 1);
     }
+
     #menu-toggle:checked ~ .menu li {
       border: 1px solid ${({ theme }) => theme.colors.red};
       height: 2.5em;
       padding: 0.5em;
       transition: height 400ms cubic-bezier(0.23, 1, 0.32, 1);
     }
+
     .menu > li {
       display: flex;
       justify-content: center;
@@ -173,6 +178,7 @@ const Nav = styled.nav`
       color: white;
       background-color: ${({ theme }) => theme.colors.red};
     }
+
     .menu > li:not(:last-child) {
       border-bottom: 1px solid ${({ theme }) => theme.colors.red};
     }

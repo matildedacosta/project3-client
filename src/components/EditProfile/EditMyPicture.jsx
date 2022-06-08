@@ -25,6 +25,30 @@ const ImageButton = styled.button`
 
 function EditMyPicture(props) {
   const { handleImage } = props;
+
+/*   const handleFileUpload = (e) => {
+    // console.log("The file to be uploaded is: ", e.target.files[0]);
+
+    const uploadData = new FormData();
+    const getToken = localStorage.getItem("authToken");
+    // imageUrl => this name has to be the same as in the model since we pass
+    // req.body to .create() method when creating a new movie in '/api/movies' POST route
+    uploadData.append("image", e.target.files[0]);
+    console.log(image);
+
+    axios
+      .post(`${process.env.REACT_APP_API_URL}/api/upload`, uploadData, {
+        headers: {
+          Authorization: `Bearer ${getToken}`,
+        },
+      })
+      .then((response) => {
+        console.log(response);
+        setImage(response.data.fileUrl);
+      })
+      .catch((err) => console.log("Error while uploading the file: ", err));
+  }; */
+
   // Create a reference to the hidden file input element
   const hiddenFileInput = React.useRef(null);
 

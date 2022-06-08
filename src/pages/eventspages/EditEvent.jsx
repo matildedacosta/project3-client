@@ -17,6 +17,7 @@ const Form = styled.form`
   justify-content: center;
   align-items: center;
   gap: 5px;
+  height: 90vh;
 
   label {
     padding: 0.2rem;
@@ -77,7 +78,6 @@ function EditEvent() {
   const handleFileUpload = (e) => {
     // console.log("The file to be uploaded is: ", e.target.files[0]);
 
-    
     const uploadData = new FormData();
     const getToken = localStorage.getItem("authToken");
     // imageUrl => this name has to be the same as in the model since we pass

@@ -10,6 +10,7 @@ const Login = styled.section`
   display: flex;
   flex-direction: column;
   padding-left: 1.5rem;
+  height: 100%;
   //width: 100%;
 
   Button {

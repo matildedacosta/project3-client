@@ -31,7 +31,8 @@ const Card = styled.section`
   }
 
   .user-card img {
-    height: 15vh;
+    height: 20vh;
+    border-radius: 50%;
   }
 
   @media (min-width: 700px) {

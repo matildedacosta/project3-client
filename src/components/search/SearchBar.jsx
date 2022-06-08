@@ -34,7 +34,7 @@ const SearchDiv = styled.div`
 function SearchBar(props) {
   return (
     <SearchDiv className="search-bar">
-      <label htmlFor="search">Encontra a tua tribo: </label>
+      <label htmlFor="search">Encontra a tua tribo </label>
       <input
         type="text"
         name="search"

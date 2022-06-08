@@ -29,6 +29,22 @@ const UserSkills = styled.section`
     border: 0.01rem solid ${({ theme }) => theme.colors.red};
     border-radius: 5px;
   }
+
+  @media (min-width: 700px) {
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    h5 {
+      font-size: 1.2rem;
+    }
+
+    li {
+      padding: 0.5rem;
+      font-size: 1rem;
+    }
+  }
 `;
 
 function Skills(props) {

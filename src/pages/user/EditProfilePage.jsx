@@ -3,6 +3,7 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import userService from "../../service/User.services";
 import styled from "styled-components";
 import Button from "../../components/Button";
+import axios from "axios";
 
 import EditMySkills from "../../components/EditProfile/EditMySkills";
 import EditMyLinks from "../../components/EditProfile/EditMyLinks";
@@ -24,6 +25,7 @@ const Form = styled.form`
   /*  justify-content: center;
   align-items: center; */
   gap: 5px;
+  height: 90vh;
 
   label {
     padding: 0.2rem;
@@ -62,6 +64,8 @@ const Form = styled.form`
     color: ${({ theme }) => theme.colors.red};
     font-size: 1.1rem;
   }
+
+  
 `;
 
 function EditProfilePage() {
@@ -74,22 +78,46 @@ function EditProfilePage() {
   const [location, setLocation] = useState("");
   const [skills, setSkills] = useState([]);
   const [links, setLinks] = useState();
+  const [userData, setUserData] = useState(null);
 
   const [errorMessage, setErrorMessage] = useState(undefined);
 
   const navigate = useNavigate();
 
+  const handleFileUpload = (e) => {
+    // console.log("The file to be uploaded is: ", e.target.files[0]);
+
+    const uploadData = new FormData();
+    const getToken = localStorage.getItem("authToken");
+    // imageUrl => this name has to be the same as in the model since we pass
+    // req.body to .create() method when creating a new movie in '/api/movies' POST route
+    uploadData.append("image", e.target.files[0]);
+    console.log(image);
+
+    axios
+      .post(`${process.env.REACT_APP_API_URL}/api/upload`, uploadData, {
+        headers: {
+          Authorization: `Bearer ${getToken}`,
+        },
+      })
+      .then((response) => {
+        console.log(response);
+        setImage(response.data.fileUrl);
+      })
+      .catch((err) => console.log("Error while uploading the file: ", err));
+  };
+
   const getProfile = async () => {
     try {
       let response = await userService.getOneUser(id);
-      setUsername(response.data.username);
-      setSkills(response.data.skills);
-      setLinks(response.data.links);
-      setEmail(response.data.email);
-      setImage(response.data.image);
-      setFullName(response.data.fullName);
-      setDescription(response.data.description);
-      setLocation(response.data.location);
+      setUsername(response.data.user.username);
+      setSkills(response.data.user.skills);
+      setLinks(response.data.user.links);
+      setEmail(response.data.user.email);
+      setImage(response.data.user.image);
+      setFullName(response.data.user.fullName);
+      setDescription(response.data.user.description);
+      setLocation(response.data.user.location);
     } catch (error) {
       console.log(error);
     }
@@ -170,7 +198,9 @@ function EditProfilePage() {
   return (
     <div>
       <Form onSubmit={handleSubmit}>
-        <EditMyPicture handleImage={handleImage} />
+        <label htmlFor="image">Imagem</label>
+        <input type="file" onChange={handleFileUpload} />
+        {/*   <EditMyPicture handleImage={handleImage} /> */}
         <label className="main-label" htmlFor="fullName">
           Full Name*
         </label>
@@ -218,7 +248,7 @@ function EditProfilePage() {
           name="location"
           onChange={handleLocation}
         />
-        <EditMySkills handleSkills={handleSkills} />
+        <EditMySkills skills={skills} handleSkills={handleSkills} />
         <label className="main-label" htmlFor="links">
           Links*
         </label>

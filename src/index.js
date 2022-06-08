@@ -12,6 +12,7 @@ import FontStyles from "./styles/fontStyles";
 const theme = {
   colors: {
     red: "#B33951",
+    lightRed: "#B33951",
     yellow: "#E3D081",
     black: "#000000",
     white: "#FFFFFF",

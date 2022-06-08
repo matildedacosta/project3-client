@@ -8,7 +8,7 @@ const FilterDiv = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  justify-content: center;
+  //justify-content: center;
   border: 0.01rem solid ${({ theme }) => theme.colors.red};
   border-radius: 5px;
   background-color: ${({ theme }) => theme.colors.weirdWhite};

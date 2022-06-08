@@ -29,7 +29,7 @@ const SobreMusiTribo = styled.section`
     }
 
     p {
-      font-size: 1rem;
+      font-size: 1.1rem;
       line-height: 4rem;
       width: 70vw;
     }
