@@ -25,6 +25,12 @@ const Skills = styled.div`
   .skills-label {
     color: ${({ theme }) => theme.colors.red};
   }
+
+  @media (min-width: 700px) {
+    input {
+      width: 2vw;
+    }
+  }
 `;
 
 let skillsArr = [

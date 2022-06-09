@@ -76,7 +76,7 @@ const FilterDiv = styled.div`
     justify-content: flex-start;
     width: 20vw;
     height: 45vh;
-    //gap: 5px;
+    gap: 20px;
     margin-top: 3rem;
 
     h6 {

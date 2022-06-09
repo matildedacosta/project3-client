@@ -12,6 +12,12 @@ const StyledButton = styled.button`
   padding: 0.7rem;
   text-align: center;
   font-size: 0.7rem;
+
+  /*   @media (min-width: 700px) {
+    height: 10vh;
+    width: 5vw;
+    font-size: 1rem;
+  } */
 `;
 
 function DeleteButton({ children }) {

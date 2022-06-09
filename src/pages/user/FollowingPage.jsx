@@ -16,6 +16,10 @@ const Following = styled.section`
   //justify-content: center;
   height: 90vh;
 
+  h3 {
+    color: ${({ theme }) => theme.colors.red};
+  }
+
   h6 {
     font-size: 0.6rem;
   }

@@ -18,6 +18,12 @@ const Links = styled.div`
     color: ${({ theme }) => theme.colors.darkGrey};
     width: 25vw;
   }
+
+  @media (min-width: 700px) {
+    label {
+      width: 8vw;
+    }
+  }
 `;
 
 function EditMyLinks(props) {

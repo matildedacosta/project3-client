@@ -56,7 +56,7 @@ function Main() {
     <HomeMain>
       {/*  <img className="img" src={musitribo} alt="bg-pic" /> */}
       <h1>MusiTribo</h1>
-      <h2>a tocar na mesma vibração.</h2>
+      <h2>a tocar na mesma vibração</h2>
       <link
         href="https://fonts.googleapis.com/css2?family=Mansalva&family=Rock+Salt&display=swap"
         rel="stylesheet"

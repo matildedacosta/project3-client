@@ -16,6 +16,19 @@ const Form = styled.form`
   justify-content: center;
   align-items: center;
   height: 90vh;
+  background-color: ${({ theme }) => theme.colors.weirdWhite};
+
+  .form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 0.05rem solid ${({ theme }) => theme.colors.red};
+    border-radius: 5px;
+    background-color: ${({ theme }) => theme.colors.lightPink};
+    padding: 1rem;
+    width: 50vw;
+  }
 
   Button {
     margin: 1rem;
@@ -36,12 +49,41 @@ const Form = styled.form`
     border: 0.02rem solid ${({ theme }) => theme.colors.red};
     border-radius: 5px;
     padding: 0.2rem;
+    background-color: ${({ theme }) => theme.colors.weirdWhite};
   }
 
   textarea {
     border: 0.02rem solid ${({ theme }) => theme.colors.red};
     border-radius: 5px;
     padding: 0.5rem;
+    height: 5vh;
+    width: 40vw;
+    background-color: ${({ theme }) => theme.colors.weirdWhite};
+  }
+
+  @media (min-width: 700px) {
+    Button {
+      height: 4vh;
+      width: 5vw;
+      font-size: 1rem;
+    }
+
+    textarea {
+      height: 10vh;
+      width: 20vw;
+    }
+
+    .form {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      border: 0.05rem solid ${({ theme }) => theme.colors.red};
+      border-radius: 5px;
+      background-color: ${({ theme }) => theme.colors.lightPink};
+      padding: 1rem;
+      width: 30vw;
+    }
   }
 `;
 
@@ -126,45 +168,47 @@ function CreateEvent() {
   };
   return (
     <Form onSubmit={handleSubmit} enctype="multipart/form-data">
-      <label htmlFor="image">Imagem</label>
-      <input type="file" onChange={handleFileUpload} />
+      <section className="form">
+        <label htmlFor="image">Imagem</label>
+        <input type="file" onChange={handleFileUpload} />
 
-      <label htmlFor="name">Nome do evento*</label>
-      <input type="text" value={name} name="name" onChange={handleName} />
+        <label htmlFor="name">Nome do evento*</label>
+        <input type="text" value={name} name="name" onChange={handleName} />
 
-      <label for="typeEvent">Tipo de evento*</label>
-      <select onChange={handleTypeOfEvent} name="typeEvent" id="typeEvent">
-        {typeEvent.map((event) => {
-          return (
-            <option key={event} value={event}>
-              {event}
-            </option>
-          );
-        })}
-      </select>
+        <label for="typeEvent">Tipo de evento*</label>
+        <select onChange={handleTypeOfEvent} name="typeEvent" id="typeEvent">
+          {typeEvent.map((event) => {
+            return (
+              <option key={event} value={event}>
+                {event}
+              </option>
+            );
+          })}
+        </select>
 
-      <label htmlFor="location">Localização*</label>
-      <input
-        type="text"
-        value={location}
-        name="location"
-        onChange={handleLocation}
-      />
+        <label htmlFor="location">Localização*</label>
+        <input
+          type="text"
+          value={location}
+          name="location"
+          onChange={handleLocation}
+        />
 
-      <label htmlFor="date">Data*</label>
-      <input type="date" value={date} name="date" onChange={handleDate} />
+        <label htmlFor="date">Data*</label>
+        <input type="date" value={date} name="date" onChange={handleDate} />
 
-      <label htmlFor="description">Descrição*</label>
-      <textarea
-        value={description}
-        onChange={handleDescription}
-        name="description"
-        id="description"
-        cols="30"
-        rows="10"
-      ></textarea>
+        <label htmlFor="description">Descrição*</label>
+        <textarea
+          value={description}
+          onChange={handleDescription}
+          name="description"
+          id="description"
+          cols="30"
+          rows="10"
+        ></textarea>
 
-      <Button type="submit">Criar</Button>
+        <Button type="submit">Criar</Button>
+      </section>
     </Form>
   );
 }

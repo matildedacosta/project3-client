@@ -18,6 +18,19 @@ const Form = styled.form`
   align-items: center;
   gap: 5px;
   height: 90vh;
+  background-color: ${({ theme }) => theme.colors.weirdWhite};
+
+  .form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 0.05rem solid ${({ theme }) => theme.colors.red};
+    border-radius: 5px;
+    background-color: ${({ theme }) => theme.colors.lightPink};
+    padding: 1rem;
+    width: 50vw;
+  }
 
   label {
     padding: 0.2rem;
@@ -33,12 +46,16 @@ const Form = styled.form`
     border: 0.02rem solid ${({ theme }) => theme.colors.red};
     border-radius: 5px;
     padding: 0.2rem;
+    background-color: ${({ theme }) => theme.colors.weirdWhite};
   }
 
   textarea {
     border: 0.02rem solid ${({ theme }) => theme.colors.red};
     border-radius: 5px;
     padding: 0.5rem;
+    height: 5vh;
+    width: 40vw;
+    background-color: ${({ theme }) => theme.colors.weirdWhite};
   }
 
   Button {
@@ -56,8 +73,38 @@ const Form = styled.form`
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 30vw;
+    width: 15vw;
     height: 2vh;
+    font-size: 0.8rem;
+  }
+
+  @media (min-width: 700px) {
+    .delete-button {
+      width: 5vw;
+    }
+
+    Button {
+      height: 4vh;
+      width: 8vw;
+      font-size: 1rem;
+    }
+
+    textarea {
+      height: 10vh;
+      width: 20vw;
+    }
+
+    .form {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      border: 0.05rem solid ${({ theme }) => theme.colors.red};
+      border-radius: 5px;
+      background-color: ${({ theme }) => theme.colors.lightPink};
+      padding: 1rem;
+      width: 30vw;
+    }
   }
 `;
 
@@ -180,49 +227,51 @@ function EditEvent() {
 
   return (
     <Form onSubmit={handleSubmit} enctype="multipart/form-data">
-      <label htmlFor="image">Imagem</label>
-      <input type="file" onChange={handleFileUpload} />
+      <section className="form">
+        <label htmlFor="image">Imagem</label>
+        <input type="file" onChange={handleFileUpload} />
 
-      <label htmlFor="name">Nome do evento*</label>
-      <input type="text" value={name} name="name" onChange={handleName} />
+        <label htmlFor="name">Nome do evento*</label>
+        <input type="text" value={name} name="name" onChange={handleName} />
 
-      <label for="typeEvent">Tipo de evento*</label>
-      <select onChange={handleTypeOfEvent} name="typeEvent" id="typeEvent">
-        {typeEvent.map((event) => {
-          return (
-            <option key={event} value={event}>
-              {event}
-            </option>
-          );
-        })}
-      </select>
+        <label for="typeEvent">Tipo de evento*</label>
+        <select onChange={handleTypeOfEvent} name="typeEvent" id="typeEvent">
+          {typeEvent.map((event) => {
+            return (
+              <option key={event} value={event}>
+                {event}
+              </option>
+            );
+          })}
+        </select>
 
-      <label htmlFor="location">Localização*</label>
-      <input
-        type="text"
-        value={location}
-        name="location"
-        onChange={handleLocation}
-      />
+        <label htmlFor="location">Localização*</label>
+        <input
+          type="text"
+          value={location}
+          name="location"
+          onChange={handleLocation}
+        />
 
-      <label htmlFor="date">Data*</label>
-      <input type="date" value={date} name="date" onChange={handleDate} />
+        <label htmlFor="date">Data*</label>
+        <input type="date" value={date} name="date" onChange={handleDate} />
 
-      <label htmlFor="description">Descrição*</label>
-      <textarea
-        value={description}
-        onChange={handleDescription}
-        name="description"
-        id="description"
-        cols="30"
-        rows="10"
-      ></textarea>
+        <label htmlFor="description">Descrição*</label>
+        <textarea
+          value={description}
+          onChange={handleDescription}
+          name="description"
+          id="description"
+          cols="30"
+          rows="10"
+        ></textarea>
 
-      <Button type="submit">Concluído</Button>
+        <Button type="submit">Concluído</Button>
 
-      <div className="delete-button">
-        <DeleteButton onClick={() => deleteEvent(id)}>Apagar</DeleteButton>
-      </div>
+        <div className="delete-button">
+          <DeleteButton onClick={() => deleteEvent(id)}>Apagar</DeleteButton>
+        </div>
+      </section>
     </Form>
   );
 }

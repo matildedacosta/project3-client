@@ -31,7 +31,7 @@ const Card = styled.section`
   }
 
   .user-card img {
-    height: 20vh;
+    max-height: 15vh;
     border-radius: 50%;
   }
 

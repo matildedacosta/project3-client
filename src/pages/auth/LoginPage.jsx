@@ -10,8 +10,17 @@ const Login = styled.section`
   display: flex;
   flex-direction: column;
   padding-left: 1.5rem;
-  height: 100%;
-  //width: 100%;
+  height: 100vh;
+  width: 100vw;
+  background-color: ${({ theme }) => theme.colors.lightPink};
+
+  form {
+    border: 0.05rem solid ${({ theme }) => theme.colors.red};
+    border-radius: 5px;
+    background-color: ${({ theme }) => theme.colors.weirdWhite};
+    padding: 1rem;
+    width: 50vw;
+  }
 
   Button {
     width: 30vw;
@@ -34,6 +43,7 @@ const Login = styled.section`
 
   label {
     font-size: 1rem;
+    color: ${({ theme }) => theme.colors.red};
   }
 
   .no-account {
@@ -53,6 +63,35 @@ const Login = styled.section`
   input {
     margin-bottom: 1rem;
     width: 20vh;
+    border: 0.05rem solid ${({ theme }) => theme.colors.red};
+    border-radius: 5px;
+    padding: 0.2rem;
+  }
+
+  @media (min-width: 700px) {
+    height: 100vh;
+
+    form {
+      border: 0.05rem solid ${({ theme }) => theme.colors.red};
+      border-radius: 5px;
+      background-color: ${({ theme }) => theme.colors.weirdWhite};
+      padding: 1rem;
+      width: 15vw;
+    }
+
+    Button {
+      height: 2vh;
+      width: 3vw;
+      font-size: 1rem;
+    }
+
+    .no-account Button {
+      height: 3vh;
+      width: 3vw;
+      font-size: 0.8rem;
+      background-color: ${({ theme }) => theme.colors.white};
+      color: ${({ theme }) => theme.colors.red};
+    }
   }
 `;
 

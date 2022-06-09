@@ -14,7 +14,9 @@ const Home = styled.section`
 `;
 
 function HomePage() {
+  
   return (
+    
     <Home>
       <Main />
       <hr />

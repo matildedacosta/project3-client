@@ -7,12 +7,17 @@ import Button from "../../components/Button";
 
 const Followers = styled.section`
   color: ${({ theme }) => theme.colors.darkGrey};
+  /* background-color: ${({ theme }) => theme.colors.lightPink}; */
   padding-top: 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   //justify-content: center;
   height: 90vh;
+
+  h3 {
+    color: ${({ theme }) => theme.colors.red};
+  }
 
   h6 {
     font-size: 0.6rem;

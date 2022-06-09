@@ -25,11 +25,37 @@ const Form = styled.form`
   /*  justify-content: center;
   align-items: center; */
   gap: 5px;
-  height: 90vh;
+  height: 100vh;
+  //width: 100vw;
+  overflow-y: scroll;
+  background-color: ${({ theme }) => theme.colors.lightPink};
+
+  .form {
+    border: 0.05rem solid ${({ theme }) => theme.colors.red};
+    border-radius: 5px;
+    background-color: ${({ theme }) => theme.colors.weirdWhite};
+    padding: 1rem;
+    width: 80vw;
+  }
+
+  .aside-left {
+    display: flex;
+    flex-direction: column;
+  }
 
   label {
     padding: 0.2rem;
     font-size: 1rem;
+  }
+
+  li {
+    list-style-type: none;
+  }
+
+  p {
+    text-align: center;
+    font-size: 0.8rem;
+    padding-top: 1rem;
   }
 
   input,
@@ -45,19 +71,23 @@ const Form = styled.form`
     justify-content: center; */
   }
 
+  Button {
+    width: 30vw;
+    height: 3vh;
+  }
+
   textarea {
     border: 0.02rem solid ${({ theme }) => theme.colors.red};
     border-radius: 5px;
     padding: 0.5rem;
+    margin-bottom: 1rem;
   }
 
-  li {
-    list-style-type: none;
-  }
-
-  Button {
-    margin: 1rem;
-    width: 30vw;
+  .sign-up-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
   }
 
   .main-label {
@@ -65,7 +95,64 @@ const Form = styled.form`
     font-size: 1.1rem;
   }
 
-  
+  @media (min-width: 700px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+
+    input,
+    textarea {
+      background-color: ${({ theme }) => theme.colors.weirdWhite};
+    }
+
+    .form {
+      background-color: transparent;
+      border: none;
+      display: flex;
+      justify-content: center;
+      gap: 10rem;
+      margin: 3rem 0;
+    }
+
+    .aside-left {
+      border: 0.05rem solid ${({ theme }) => theme.colors.red};
+      border-radius: 5px;
+      background-color: ${({ theme }) => theme.colors.weirdWhite};
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .aside-right {
+      border: 0.05rem solid ${({ theme }) => theme.colors.red};
+      background-color: ${({ theme }) => theme.colors.weirdWhite};
+      border-radius: 5px;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+    }
+
+    .skills input {
+      width: 1vw;
+    }
+
+    Button {
+      height: 4vh;
+      width: 5vw;
+      font-size: 1rem;
+    }
+
+    .done-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 3rem;
+    }
+  }
 `;
 
 function EditProfilePage() {
@@ -198,69 +285,84 @@ function EditProfilePage() {
   return (
     <div>
       <Form onSubmit={handleSubmit}>
-        <label htmlFor="image">Imagem</label>
-        <input type="file" onChange={handleFileUpload} />
-        {/*   <EditMyPicture handleImage={handleImage} /> */}
-        <label className="main-label" htmlFor="fullName">
-          Full Name*
-        </label>
-        <input
-          type="text"
-          value={fullName}
-          name="FullName"
-          onChange={handleFullName}
-        />
-        <label className="main-label" htmlFor="username">
-          Username*
-        </label>
-        <input
-          type="text"
-          placeholder="John Doe"
-          value={username}
-          name="username"
-          onChange={handleUsername}
-        />
-        <label className="main-label" htmlFor="email">
-          Email address*
-        </label>
-        <input
-          type="email"
-          placeholder="example@email.com"
-          value={email}
-          name="email"
-          onChange={handleEmail}
-        />
-        <label className="main-label" htmlFor="description">
-          Description
-        </label>
-        <input
-          type="text"
-          value={description}
-          name="description"
-          onChange={handleDescription}
-        />
-        <label className="main-label" htmlFor="location">
-          Location*
-        </label>
-        <input
-          type="text"
-          value={location}
-          name="location"
-          onChange={handleLocation}
-        />
-        <EditMySkills skills={skills} handleSkills={handleSkills} />
-        <label className="main-label" htmlFor="links">
-          Links*
-        </label>
-        {linksArr.map((link) => {
-          return (
-            <EditMyLinks handleLinks={handleLinks} link={link} key={link} />
-          );
-        })}
-        <Button type="submit">Concluído</Button>
+        <div className="form">
+          <div className="aside-left">
+            <label className="main-label" htmlFor="image">
+              Imagem
+            </label>
+            <input type="file" onChange={handleFileUpload} />
+            {/*   <EditMyPicture handleImage={handleImage} /> */}
+            <label className="main-label" htmlFor="fullName">
+              Nome Completo
+            </label>
+            <input
+              type="text"
+              value={fullName}
+              name="FullName"
+              onChange={handleFullName}
+            />
+            <label className="main-label" htmlFor="username">
+              Username
+            </label>
+            <input
+              type="text"
+              placeholder="John Doe"
+              value={username}
+              name="username"
+              onChange={handleUsername}
+            />
+            <label className="main-label" htmlFor="email">
+              Email address
+            </label>
+            <input
+              type="email"
+              placeholder="example@email.com"
+              value={email}
+              name="email"
+              onChange={handleEmail}
+            />
+            <label className="main-label" htmlFor="description">
+              Descrição
+            </label>
+            <input
+              type="text"
+              value={description}
+              name="description"
+              onChange={handleDescription}
+            />
+            <label className="main-label" htmlFor="location">
+              Localização
+            </label>
+            <input
+              type="text"
+              value={location}
+              name="location"
+              onChange={handleLocation}
+            />
+          </div>
+          <div className="aside-right">
+            <EditMySkills skills={skills} handleSkills={handleSkills} />
+            <div className="links">
+              <label className="main-label" htmlFor="links">
+                Links
+              </label>
+              {linksArr.map((link) => {
+                return (
+                  <EditMyLinks
+                    handleLinks={handleLinks}
+                    link={link}
+                    key={link}
+                  />
+                );
+              })}
+            </div>
+          </div>
+        </div>
+        <div className="done-button">
+          <Button type="submit">Concluído</Button>
+        </div>
       </Form>
-      <p>Already have an account?</p>
-      <Link to="/login"> Login</Link>
+
       {errorMessage && <p className="error-message">{errorMessage}</p>}
     </div>
   );

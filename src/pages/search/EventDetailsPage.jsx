@@ -13,7 +13,7 @@ const Event = styled.section`
   align-items: center;
   justify-content: center;
   gap: 5px;
-  height: 82vh;
+  height: 90vh;
   padding: 1rem;
 
   h4 {
@@ -86,7 +86,14 @@ const Event = styled.section`
     align-items: center;
     justify-content: center;
     gap: 4rem;
-    width: 90vw;
+    //height: 40vh;
+    //width: 90vw;
+
+    .event-section {
+      display: flex;
+      height: 50vh;
+      gap: 4rem;
+    }
 
     img {
       width: 30vw;
@@ -172,41 +179,43 @@ function EventDetailsPage() {
 
   return (
     <Event>
-      <div className="event-img">
-        <img src={event.image} alt="event-img" />
-      </div>
-
-      <div className="event">
-        <div className="event-info">
-          <h4>{event.name}</h4>
-          {/* <h5>Responsável: @{creator.username}</h5> */}
-          <h5>
-            <b>Localização:</b> {event.location}
-          </h5>
-          <h6>{event.date}</h6>
-          <h5>
-            <b>Tipo de evento:</b> {event.typeOfEvent}
-          </h5>
-          <p>{event.description}</p>
+      <section className="event-section">
+        <div className="event-img">
+          <img src={event.image} alt="event-img" />
         </div>
 
-        <div className="buttons">
-          <div className="event-buttons">
-            <div className="eu-vou-button">
-              <Button onClick={attendEvent}>Eu vou</Button>
+        <div className="event">
+          <div className="event-info">
+            <h4>{event.name}</h4>
+            {/* <h5>Responsável: @{creator.username}</h5> */}
+            <h5>
+              <b>Localização:</b> {event.location}
+            </h5>
+            <h6>{event.date}</h6>
+            <h5>
+              <b>Tipo de evento:</b> {event.typeOfEvent}
+            </h5>
+            <p>{event.description}</p>
+          </div>
+
+          <div className="buttons">
+            <div className="event-buttons">
+              <div className="eu-vou-button">
+                <Button onClick={attendEvent}>Eu vou</Button>
+              </div>
+              <Link to={"/search-events"}>
+                <Button>Voltar</Button>
+              </Link>
             </div>
-            <Link to={"/search-events"}>
-              <Button>Voltar</Button>
-            </Link>
-          </div>
 
-          <div className="creator-buttons">
-            <Link to={`/edit-event/${id}`}>
-              <Button>Editar</Button>
-            </Link>
+            <div className="creator-buttons">
+              <Link to={`/edit-event/${id}`}>
+                <Button>Editar</Button>
+              </Link>
+            </div>
           </div>
         </div>
-      </div>
+      </section>
     </Event>
   );
 }
