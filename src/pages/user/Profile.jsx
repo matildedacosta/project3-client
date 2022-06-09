@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import userService from "../../service/User.services";
 import styled from "styled-components";
+import { Spinner } from "@chakra-ui/react";
 
 import { AuthContext } from "../../context/auth.context";
 
@@ -110,6 +111,7 @@ function Profile() {
   const [skills, setSkills] = useState([]);
   const [links, setLinks] = useState({});
   const [receivedComments, setComments] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const { logoutUser } = useContext(AuthContext);
 

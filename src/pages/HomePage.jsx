@@ -8,15 +8,14 @@ import Sobre from "../components/Sobre";
 
 const Home = styled.section`
   width: 100%;
+
   hr {
     color: ${({ theme }) => theme.colors.red};
   }
 `;
 
 function HomePage() {
-  
   return (
-    
     <Home>
       <Main />
       <hr />
