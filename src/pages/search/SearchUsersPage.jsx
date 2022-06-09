@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/auth.context";
 import userService from "../../service/User.services";
@@ -55,18 +55,24 @@ function SearchUsersPage(props) {
     /* console.log(allUsers.data.users); */
   };
 
-  getAllUsers();
+  useEffect(() => {
+    getAllUsers();
+  }, []);
 
   return (
-    <SearchUsers>
-      <SearchBar handleSearch={handleSearch} search={search} />
+    <>
+      {users.length > 0 && (
+        <SearchUsers>
+          <SearchBar handleSearch={handleSearch} search={search} />
 
-      <div className="users-filter-and-card">
-        <SearchFilter className="filter-div" />
+          <div className="users-filter-and-card">
+            <SearchFilter className="filter-div" />
 
-        <SearchCard users={users} />
-      </div>
-    </SearchUsers>
+            <SearchCard users={users} />
+          </div>
+        </SearchUsers>
+      )}
+    </>
   );
 }
 

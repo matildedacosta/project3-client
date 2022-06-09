@@ -5,6 +5,10 @@ import { AuthContext } from "../../context/auth.context";
 import Button from "../../components/Button";
 import EventInfo from "../../components/eventsSearch/EventInfo";
 import styled from "styled-components";
+import userService from "../../service/User.services";
+
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Event = styled.section`
   //margin-top: 2rem;
@@ -21,11 +25,6 @@ const Event = styled.section`
     padding-top: 1rem;
     color: ${({ theme }) => theme.colors.red};
   }
-
-  /*  h1 {
-    font-size: 1.2rem;
-    padding: 0.5rem 0 0.1rem;
-  } */
 
   h5 {
     font-size: 1rem;
@@ -65,9 +64,13 @@ const Event = styled.section`
     background-color: ${({ theme }) => theme.colors.lightPink};
   }
 
-  .eu-vou-button Button {
+  .eu-vou-button button {
     color: ${({ theme }) => theme.colors.red};
     background-color: ${({ theme }) => theme.colors.yellow};
+    border: none;
+    border-radius: 5px;
+    min-height: 1.5rem;
+    min-width: 4rem;
   }
 
   .buttons {
@@ -79,6 +82,12 @@ const Event = styled.section`
 
   Button {
     font-size: 0.8rem;
+  }
+
+  .event-img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   @media (min-width: 700px) {
@@ -147,18 +156,46 @@ const Event = styled.section`
 
 function EventDetailsPage() {
   const { id } = useParams();
-  const [event, setEvent] = useState({});
+  const [event, setEvent] = useState(null);
   const { user } = useContext(AuthContext);
-  const [creator, setCreator] = useState();
+  const [creator, setCreator] = useState({});
+  const [oneUser, setOneUser] = useState("");
 
   const navigate = useNavigate();
 
   const getEvent = async () => {
     try {
       let response = await eventServices.getOneEvent(id);
-      console.log(response.data);
+      //console.log(response.data);
       setEvent(response.data);
-      setCreator(response.data.creator);
+      setCreator(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const errorHandle = (message) => {
+    toast.error(message, {
+      position: "top-right",
+      autoClose: 2000,
+      closeOnClick: true,
+      //hideProgressBar: true,
+    });
+  };
+  const successHandle = (message) => {
+    toast.success(message, {
+      position: "top-right",
+      autoClose: 2000,
+      closeOnClick: true,
+      //hideProgressBar: true,
+    });
+  };
+
+  const getUser = async () => {
+    try {
+      let response = await userService.getOneUser(id);
+      console.log(response.data);
+      setOneUser(response.data.user);
     } catch (error) {
       console.log(error);
     }
@@ -166,56 +203,67 @@ function EventDetailsPage() {
 
   useEffect(() => {
     getEvent();
+    getUser();
   }, []);
 
   const attendEvent = () => {
     eventServices
       .attendEvent(id)
       .then(() => {
-        navigate(`/profile/${user._id}/events`);
+        console.log("success");
+        successHandle("Vais ao evento!");
+        //navigate(`/profile/${user._id}/events`);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        errorHandle("Já estás inscrito");
+      });
   };
 
   return (
     <Event>
-      <section className="event-section">
-        <div className="event-img">
-          <img src={event.image} alt="event-img" />
-        </div>
-
-        <div className="event">
-          <div className="event-info">
-            <h4>{event.name}</h4>
-            {/* <h5>Responsável: @{creator.username}</h5> */}
-            <h5>
-              <b>Localização:</b> {event.location}
-            </h5>
-            <h6>{event.date}</h6>
-            <h5>
-              <b>Tipo de evento:</b> {event.typeOfEvent}
-            </h5>
-            <p>{event.description}</p>
+      <ToastContainer />
+      {event !== null && (
+        <section className="event-section">
+          <div className="event-img">
+            <img src={event.image} alt="event-img" />
           </div>
 
-          <div className="buttons">
-            <div className="event-buttons">
-              <div className="eu-vou-button">
-                <Button onClick={attendEvent}>Eu vou</Button>
+          <div className="event">
+            <div className="event-info">
+              <h4>{event.name}</h4>
+              <h5>Responsável: @{event.creator.username}</h5>
+              {console.log(event.creator)}
+              <h5>
+                <b>Localização:</b> {event.location}
+              </h5>
+              <h6>{event.date}</h6>
+              <h5>
+                <b>Tipo de evento:</b> {event.typeOfEvent}
+              </h5>
+              <p>{event.description}</p>
+            </div>
+
+            <div className="buttons">
+              <div className="event-buttons">
+                <div className="eu-vou-button">
+                  {/* <Button onClick={() => attendEvent(id)}>Eu vou</Button> */}
+                  <button onClick={() => attendEvent()}>Eu vou</button>
+                </div>
+                <Link to={"/search-events"}>
+                  <Button>Voltar</Button>
+                </Link>
               </div>
-              <Link to={"/search-events"}>
-                <Button>Voltar</Button>
-              </Link>
-            </div>
-
-            <div className="creator-buttons">
-              <Link to={`/edit-event/${id}`}>
-                <Button>Editar</Button>
-              </Link>
+              {user && event.creator && user._id === event.creator._id && (
+                <div className="creator-buttons">
+                  <Link to={`/edit-event/${id}`}>
+                    <Button>Editar</Button>
+                  </Link>
+                </div>
+              )}
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
     </Event>
   );
 }

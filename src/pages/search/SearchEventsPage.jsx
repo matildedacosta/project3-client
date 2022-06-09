@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/auth.context";
 import eventServices from "../../service/Events.services";
@@ -39,7 +39,9 @@ function SearchEventsPage() {
     setEvents(allEvents.data);
   };
 
-  getAllEvents();
+  useEffect(() => {
+    getAllEvents();
+  }, []);
 
   const handleSearch = (e) => {
     //this handles the input state

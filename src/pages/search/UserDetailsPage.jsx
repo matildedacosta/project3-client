@@ -6,11 +6,13 @@ import commentService from "../../service/Comments.services";
 import styled from "styled-components";
 import { AuthContext } from "../../context/auth.context";
 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 //Components
 import UserInfo from "../../components/Profile/UserInfo";
 import Skills from "../../components/Profile/Skills";
 import Links from "../../components/Profile/Links";
-import Comments from "../../components/Profile/Comments";
 import Button from "../../components/Button";
 
 const UserProfile = styled.section`
@@ -100,6 +102,35 @@ const UserProfile = styled.section`
     border: 0.05rem solid ${({ theme }) => theme.colors.yellow};
   }
 
+  .info button {
+    margin-bottom: 0.5rem;
+  }
+
+  #remove-follow {
+    background-color: ${({ theme }) => theme.colors.yellow};
+    color: ${({ theme }) => theme.colors.red};
+    width: 30vw;
+  }
+
+  #add-follow {
+    background-color: ${({ theme }) => theme.colors.red};
+    color: ${({ theme }) => theme.colors.weirdWhite};
+  }
+
+  .one-comment button {
+    border: none;
+    border-radius: 5px;
+    height: 2vh;
+    width: 10vw;
+    font-size: 0.6rem;
+    background-color: ${({ theme }) => theme.colors.red};
+    color: ${({ theme }) => theme.colors.weirdWhite};
+  }
+
+  .one-comment h5 {
+    font-size: 0.6rem;
+  }
+
   @media (min-width: 700px) {
     .user-comments h4 {
       font-size: 1rem;
@@ -148,12 +179,12 @@ const UserProfile = styled.section`
 
 function UserDetailsPage() {
   const { id } = useParams();
-  const [userDetails, setUser] = useState({});
+  const [userDetails, setUser] = useState(null);
   const [skills, setSkills] = useState([]);
   const [links, setLinks] = useState({});
   const [receivedComments, setComments] = useState([]);
-  const [newComments, setNewComments] = useState("");
-  const [follow, setFollow] = useState();
+  const [comment, setComment] = useState("");
+  const [follow, setFollow] = useState("");
   const [loggedUser, setLoggedUser] = useState();
   const [paramsId, setParamsId] = useState("");
 
@@ -165,9 +196,9 @@ function UserDetailsPage() {
 
   const addFollow = async (id) => {
     try {
-      setFollow(false);
+      setFollow("true");
       await followService.addFollow(id);
-      console.log("clButton", follow);
+      successHandle(`Segues ${userDetails.username}`);
       //change button
       getUser();
     } catch (err) {
@@ -177,110 +208,162 @@ function UserDetailsPage() {
 
   const removeFollow = async (id) => {
     try {
-      console.log("click", follow);
-      setFollow(true);
       await followService.removeFollow(id);
+      setFollow("false");
+      errorHandle(`Deixaste de seguir ${userDetails.username}`);
     } catch (err) {
       console.log(err);
     }
   };
 
+  
+
+  const errorHandle = (message) => {
+    toast.error(message, {
+      position: "top-right",
+      autoClose: 2000,
+      closeOnClick: true,
+      //hideProgressBar: true,
+    });
+  };
+  const successHandle = (message) => {
+    toast.success(message, {
+      position: "top-right",
+      autoClose: 2000,
+      closeOnClick: true,
+      //hideProgressBar: true,
+    });
+  };
+
   const getUser = async () => {
     try {
       let response = await userService.getOneUser(id);
-      //console.log(response.data);
       setUser(response.data.user);
       setSkills(response.data.user.skills);
       setLinks(response.data.user.links);
       setComments(response.data.user.receivedComments);
       setParamsId(response.data.user._id);
-      console.log(response.data.user.receivedComments);
-
-      if (response.data.user.followers.includes(user._id)) {
-        setFollow(false);
-      } else return setFollow(true);
+      checkFollowStatus(response);
     } catch (error) {
       console.log(error);
     }
   };
 
-  useEffect(() => {
-    getUser();
-  }, []);
-
-  const handleComments = (e) => {
-    setNewComments(e.target.value);
+  const checkFollowStatus = (response) => {
+    if (response.data.user.followers.length === 0) {
+      setFollow("true");
+    } else {
+      for (let i = 0; i < response.data.user.followers.length; i++) {
+        if (response.data.user.followers[i]._id === user._id) {
+          setFollow("false");
+          break;
+        } else setFollow("true");
+      }
+    }
   };
 
-  const submitComment = async (e, id) => {
+  useEffect(() => {
+    getUser();
+  }, [checkFollowStatus]);
+
+  const handleComments = (e) => {
+    setComment(e.target.value);
+  };
+
+  const postComment = async () => {
     try {
-      e.preventDefault();
-      const body = { newComments };
+      const body = { comment };
       await commentService.addComment(id, body);
       console.log(body);
-      setNewComments("");
+      setComment("");
+      getUser();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const submitComment = (e) => {
+    e.preventDefault();
+    postComment();
+  };
+
+  const deleteComment = async (commentID) => {
+    try {
+      await commentService.removeComment(commentID);
+      getUser();
     } catch (error) {
       console.log(error);
     }
   };
 
   return (
-    <UserProfile>
-      <UserInfo user={userDetails} />
-      <div className="info">
-        <div className="follow-button">
-          {follow === true && (
-            <button
-              onClick={() => {
-                addFollow(id);
-              }}
-            >
-              Seguir
-            </button>
-          )}
-          {follow === false && (
-            <button
-              onClick={() => {
-                removeFollow(id);
-              }}
-            >
-              Deixar de Seguir
-            </button>
-          )}
-        </div>
-
-        <Skills skills={skills} />
-        <Links links={links} />
-      </div>
-      <form
-        onSubmit={(paramsId) => {
-          submitComment(paramsId);
-        }}
-      >
-        <textarea
-          value={newComments}
-          name="comments"
-          cols="30"
-          rows="5"
-          onChange={handleComments}
-        ></textarea>
-        <button type="submit">Comentar</button>
-      </form>
-
-      <section className="user-comments">
-        <h4>Comentários:</h4>
-        {receivedComments.map((el) => {
-          return (
-            <div className="one-comment" key={el._id}>
-              <p>{el.comment}</p>
-              <h5>
-                <b>Por</b> {el.commentBy.username}
-              </h5>
+    <>
+      <ToastContainer />
+      {userDetails !== null && user && (
+        <UserProfile>
+          <UserInfo user={userDetails} />
+          <div className="info">
+            <div className="follow-button">
+              {follow === "true" && (
+                <button
+                  id="add-follow"
+                  onClick={() => {
+                    addFollow(userDetails._id);
+                  }}
+                >
+                  Seguir
+                </button>
+              )}
+              {follow === "false" && (
+                <button
+                  id="remove-follow"
+                  onClick={() => {
+                    removeFollow(userDetails._id);
+                  }}
+                >
+                  Deixar de Seguir
+                </button>
+              )}
             </div>
-          );
-        })}
-      </section>
-    </UserProfile>
+
+            <Skills skills={skills} />
+            <Links links={links} />
+          </div>
+          <form onSubmit={submitComment}>
+            <textarea
+              value={comment}
+              name="comments"
+              cols="30"
+              rows="5"
+              onChange={handleComments}
+            ></textarea>
+            <button type="submit">Comentar</button>
+          </form>
+
+          <section className="user-comments">
+            {receivedComments.length > 0 && (
+              <>
+                <h4>Comentários:</h4>
+
+                {receivedComments.map((el) => {
+                  return (
+                    <div className="one-comment" key={el._id}>
+                      <p>{el.comment}</p>
+                      <h5>
+                        <b>Por</b> {el.commentBy.username}
+                      </h5>
+                      <button onClick={() => deleteComment(el._id)}>
+                        Delete
+                      </button>
+                    </div>
+                  );
+                })}
+              </>
+            )}
+          </section>
+        </UserProfile>
+      )}
+    </>
   );
 }
 

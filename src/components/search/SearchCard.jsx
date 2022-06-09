@@ -71,19 +71,23 @@ const Card = styled.section`
 
 function SearchCard(props) {
   const { users } = props;
+  const { user } = useContext(AuthContext);
   return (
     <Card className="all-users-cards">
-      {users.map((user) => {
-        return (
-          <div className="user-card" key={user._id}>
-            <img src={user.image} alt="user-img" />
-            <h5> {user.username}</h5>
-            <h6>{user.location}</h6>
-            <Link to={`/user-details/${user._id}`}>
-              <Button>Ver mais</Button>
-            </Link>
-          </div>
-        );
+      {users.map((el) => {
+        if (el._id === user._id) {
+          return <p></p>;
+        } else
+          return (
+            <div className="user-card" key={el._id}>
+              <img src={el.image} alt="user-img" />
+              <h5> {el.username}</h5>
+              <h6>{el.location}</h6>
+              <Link to={`/user-details/${el._id}`}>
+                <Button>Ver mais</Button>
+              </Link>
+            </div>
+          );
       })}
     </Card>
   );

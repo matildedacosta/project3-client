@@ -59,6 +59,31 @@ const Event = styled.section`
     height: 4vh;
   }
 
+  /*  .no-event {
+    display: flex;
+    flex-direction: column;
+    gap: 5rem;
+    height: 70vh;
+  } */
+
+  .no-events Button {
+    min-height: 1.5rem;
+    min-width: 4rem;
+    margin: 0.5rem 0 2rem 0;
+  }
+
+  .event-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .event-img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
   @media (min-width: 700px) {
     .all-events {
       display: flex;
@@ -142,12 +167,12 @@ function MyEventsPage() {
         })}
       </div>
       {myEvents.length <= 0 && (
-        <>
+        <div className="no-events">
           <p>Sem eventos.</p>
-          {/* <Link to={`profile/${user._id}`}>
-            <Button>Voltar</Button>
-          </Link> */}
-        </>
+          <Button className="button">
+            <Link to="/create-event">Criar evento</Link>
+          </Button>
+        </div>
       )}
 
       <div className="go-back-button">
